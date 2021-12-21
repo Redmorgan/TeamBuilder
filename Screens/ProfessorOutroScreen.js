@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Button, Text, Vibration } from "react-native";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
 
@@ -9,20 +8,7 @@ import SelectBackground from '../images/SelectBackground.png'
 import Oak from '../images/Oak.png'
 import TextBoxImage from '../images/TextBox.png'
 
-const ProfessorIntroScreen = ( { navigation: { navigate } }) => {
-
-  useEffect(()=>{
-
-    async function playBackgroundMusic(){
-      const { sound } = await Audio.Sound.createAsync(
-        require('../audio/professorMusic.mp3')
-      );
-      //await sound.playAsync()
-    }
-
-    playBackgroundMusic()
-
-  }, [])
+const ProfessorOutroScreen = ({ route }) => {
 
   async function onPressSound(){
     const { sound } = await Audio.Sound.createAsync(
@@ -31,42 +17,29 @@ const ProfessorIntroScreen = ( { navigation: { navigate } }) => {
     await sound.playAsync()
   }
 
+  var gameVersion = route.params.selectedGame
 
-  const [profText, nextProfText] = useState(1);
+  var gameName = "";
 
-  function nextText(){
+  if(gameVersion == "red" || gameVersion == "blue" || gameVersion == "yellow"){
 
-    if(profText == 1){
-
-      onPressSound()
-      nextProfText(2)
-
-    }else if(profText == 2){
-
-      onPressSound()
-      navigate('SelectGame')
-
-    }
+    gameName = "Kanto"
 
   }
 
   return (
 
-		<MainView>
+    <MainView>
 
       <Background source={SelectBackground}> 
 
         <OakImage source={Oak}></OakImage>
 
-        <TextBoxTouchable onPress={() => {nextText();}} underlayColor={'transparent'} activeOpacity={1}>
+        <TextBoxTouchable underlayColor={'transparent'} activeOpacity={1}>
 
           <TextBoxWrapper>
 
-            {(profText == 1)?<TextBoxText>Welcome to the world of Pokémon!</TextBoxText>:null}
-
-            {(profText == 2)?<TextBoxText>What region will you be travelling to for your adventure?</TextBoxText>:null}
-
-            {(profText == 3)?<TextBoxText>Oh, the {gameSelected} region! I hope you have a wonderful time!</TextBoxText>:null}
+            <TextBoxText>Oh, the {gameName} region! I hope you have a wonderful time!</TextBoxText>
 
             <TextBoxBackground source={TextBoxImage} resizeMode="stretch"/>
 
@@ -133,4 +106,4 @@ const TextBoxText = styled.Text`
 
 `
 
-export default ProfessorIntroScreen;
+export default ProfessorOutroScreen;

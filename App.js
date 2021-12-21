@@ -3,8 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import StartScreen from '../TeamBuilder/Screens/StartScreen.js'
-import ProfessorIntroScreen from './Screens/ProfessorIntroScreen.js'
+import ProfessorIntroScreen from '../TeamBuilder/Screens/ProfessorIntroScreen.js'
 import SelectGameScreen from '../TeamBuilder/Screens/SelectGameScreen.js'
+import ProfessorOutroScreen from '../TeamBuilder/Screens/ProfessorOutroScreen.js'
 import SelectTeamScreen from '../TeamBuilder/Screens/SelectTeamScreen.js'
 
 
@@ -19,9 +20,11 @@ export default function App() {
 
         <Stack.Screen name="Start"component={StartScreen}/>
 
-        <Stack.Screen name="ProfessorIntro" component={ProfessorIntroScreen} />
+        <Stack.Screen name="ProfessorIntro" component={ProfessorIntroScreen}/>
 
         <Stack.Screen name="SelectGame" component={SelectGameScreen} />
+
+        <Stack.Screen name="ProfessorOutro" component={ProfessorOutroScreen}/>
 
         <Stack.Screen name="SelectTeam" component={SelectTeamScreen} />
 
