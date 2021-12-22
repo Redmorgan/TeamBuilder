@@ -1,17 +1,24 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as Font from 'expo-font';
 
+// Components
 import StartScreen from '../TeamBuilder/Screens/StartScreen.js'
 import ProfessorIntroScreen from '../TeamBuilder/Screens/ProfessorIntroScreen.js'
 import SelectGameScreen from '../TeamBuilder/Screens/SelectGameScreen.js'
 import ProfessorOutroScreen from '../TeamBuilder/Screens/ProfessorOutroScreen.js'
 import SelectTeamScreen from '../TeamBuilder/Screens/SelectTeamScreen.js'
 
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+  Font.loadAsync({
+    PokemonStyle: require('../TeamBuilder/assets/Pokemon-DPPt.ttf'),
+  });
+
+
   return (
 
     <NavigationContainer>
