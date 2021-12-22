@@ -8,6 +8,7 @@ import { Audio } from 'expo-av'
 import SelectBackground from '../images/SelectBackground.png'
 import Oak from '../images/Oak.png'
 import TextBoxImage from '../images/TextBox.png'
+import BobberGif from '../images/Bobber.gif'
 
 const ProfessorOutroScreen = ({ route, navigation }) => {
 
@@ -64,9 +65,11 @@ const ProfessorOutroScreen = ({ route, navigation }) => {
 
           <TextBoxWrapper>
 
-          <TextBoxText style={{fontFamily:'PokemonStyle'}}>Oh, the {gameName} region! I hope you have a wonderful time!</TextBoxText>
+            <TextBoxText style={{fontFamily:'PokemonStyle'}}>Oh, the {gameName} region! I hope you have a wonderful time!</TextBoxText>
 
             <TextBoxBackground source={TextBoxImage} resizeMode="stretch"/>
+
+            <Bobber source={BobberGif}/>
 
           </TextBoxWrapper>
 
@@ -128,6 +131,17 @@ const TextBoxText = styled.Text`
   position:absolute;
   z-index:2;
   font-size:40px
+
+`
+
+const Bobber = styled.Image`
+
+  width:20px
+  height:20px
+  z-index:3
+  position:absolute
+  bottom:10px
+  right:15px
 
 `
 

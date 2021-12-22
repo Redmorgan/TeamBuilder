@@ -8,21 +8,28 @@ import { Audio } from 'expo-av'
 import SelectBackground from '../images/SelectBackground.png'
 import Oak from '../images/Oak.png'
 import TextBoxImage from '../images/TextBox.png'
+import BobberGif from '../images/Bobber.gif'
 
 const ProfessorIntroScreen = ( { navigation }) => {
 
+  const [musicStatus, setMusicStatus] = useState(true)
+  const [sound, setSound] = useState(new Audio.Sound());
+
   useEffect(()=>{
-
-    async function playBackgroundMusic(){
-      const { sound } = await Audio.Sound.createAsync(
-        require('../audio/professorMusic.mp3')
-      );
-      //await sound.playAsync()
-    }
-
-    playBackgroundMusic()
-
-  }, [])
+    (async () => {
+            if (musicStatus) {
+                await sound.loadAsync(require('../audio/professorMusic.mp3'))
+                try {
+                    await sound.playAsync()
+                } catch (e) {
+                    console.log(e)
+                }
+            }else {
+                await sound.stopAsync()
+                await sound.unloadAsync()
+            }
+          })()
+  },[musicStatus])
 
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
@@ -31,7 +38,6 @@ const ProfessorIntroScreen = ( { navigation }) => {
     await sound.playAsync()
     Vibration.vibrate(5)
   }
-
 
   const [profText, nextProfText] = useState(1);
 
@@ -66,6 +72,8 @@ const ProfessorIntroScreen = ( { navigation }) => {
             {(profText == 1)?<TextBoxText style={{fontFamily:'PokemonStyle'}}>Welcome to the world of Pokémon!</TextBoxText>:null}
 
             {(profText == 2)?<TextBoxText style={{fontFamily:'PokemonStyle'}}>What region will you be travelling to for your adventure?</TextBoxText>:null}
+
+            <Bobber source={BobberGif}/>
 
             <TextBoxBackground source={TextBoxImage} resizeMode="stretch"/>
 
@@ -129,6 +137,17 @@ const TextBoxText = styled.Text`
   position:absolute;
   z-index:2;
   font-size:40px
+
+`
+
+const Bobber = styled.Image`
+
+  width:20px
+  height:20px
+  z-index:3
+  position:absolute
+  bottom:10px
+  right:15px
 
 `
 
