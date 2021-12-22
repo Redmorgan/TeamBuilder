@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Text, Vibration } from "react-native";
+import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
 
@@ -9,7 +9,7 @@ import SelectBackground from '../images/SelectBackground.png'
 import Oak from '../images/Oak.png'
 import TextBoxImage from '../images/TextBox.png'
 
-const ProfessorIntroScreen = ( { navigation: { navigate } }) => {
+const ProfessorIntroScreen = ( { navigation }) => {
 
   useEffect(()=>{
 
@@ -24,11 +24,12 @@ const ProfessorIntroScreen = ( { navigation: { navigate } }) => {
 
   }, [])
 
-  async function onPressSound(){
+  async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
       require('../audio/pressSound.mp3')
     );
     await sound.playAsync()
+    Vibration.vibrate(5)
   }
 
 
@@ -38,13 +39,13 @@ const ProfessorIntroScreen = ( { navigation: { navigate } }) => {
 
     if(profText == 1){
 
-      onPressSound()
+      onPressButton()
       nextProfText(2)
 
     }else if(profText == 2){
 
-      onPressSound()
-      navigate('SelectGame')
+      onPressButton()
+      navigation.push('SelectGame')
 
     }
 
@@ -62,11 +63,9 @@ const ProfessorIntroScreen = ( { navigation: { navigate } }) => {
 
           <TextBoxWrapper>
 
-            {(profText == 1)?<TextBoxText>Welcome to the world of Pokémon!</TextBoxText>:null}
+            {(profText == 1)?<TextBoxText style={{fontFamily:'PokemonStyle'}}>Welcome to the world of Pokémon!</TextBoxText>:null}
 
-            {(profText == 2)?<TextBoxText>What region will you be travelling to for your adventure?</TextBoxText>:null}
-
-            {(profText == 3)?<TextBoxText>Oh, the {gameSelected} region! I hope you have a wonderful time!</TextBoxText>:null}
+            {(profText == 2)?<TextBoxText style={{fontFamily:'PokemonStyle'}}>What region will you be travelling to for your adventure?</TextBoxText>:null}
 
             <TextBoxBackground source={TextBoxImage} resizeMode="stretch"/>
 
@@ -129,7 +128,7 @@ const TextBoxText = styled.Text`
   height:80%;
   position:absolute;
   z-index:2;
-  font-size:30px
+  font-size:40px
 
 `
 
