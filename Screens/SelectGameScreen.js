@@ -29,12 +29,14 @@ import White from '../images/logos/White.png'
 
 const SelectGameScreen = ({ navigation }) => {
 
+
     async function onPressButton(){
         const { sound } = await Audio.Sound.createAsync(
           require('../audio/pressSound.mp3')
         );
         await sound.playAsync()
         Vibration.vibrate(5)
+
       }
 
     const [selectionState, selectGame] = useState("none");

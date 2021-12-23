@@ -6,6 +6,7 @@ import { Audio } from 'expo-av'
 
 //images
 import SelectBackground from '../images/SelectBackground.png'
+import BackImage from '../images/BackArrow.png'
 import Oak from '../images/Oak.png'
 import TextBoxImage from '../images/TextBox.png'
 import BobberGif from '../images/Bobber.gif'
@@ -22,8 +23,18 @@ const ProfessorOutroScreen = ({ route, navigation }) => {
 
   function gotoSelectTeam(){
 
+    global.backgroundMusic.stopAsync()
+    global.backgroundMusic.unloadAsync()
+
     onPressButton()
     navigation.push('SelectTeam')
+
+  }
+
+  function previousScreen(){
+
+    onPressButton()
+    navigation.goBack()
 
   }
 
@@ -57,7 +68,13 @@ const ProfessorOutroScreen = ({ route, navigation }) => {
 
     <MainView>
 
-      <Background source={SelectBackground}> 
+      <Background source={SelectBackground}>
+        
+        <BackArrowButton underlayColor={'transparent'} activeOpacity={1} onPress={()=>{previousScreen()}}>
+
+          <BackArrowImage source={BackImage}/>
+
+        </BackArrowButton>
 
         <OakImage source={Oak}></OakImage>
 
@@ -94,6 +111,20 @@ const Background = styled.ImageBackground`
   height:100%;
   display: flex;
   align-items: center;
+`
+
+const BackArrowButton = styled.TouchableHighlight`
+  width:50px
+  height:50px
+  position:absolute
+  z-index:4
+  top:4%
+  left:10px
+`
+
+const BackArrowImage = styled.Image`
+  width:100%;
+  height:100%;
 `
 
 const OakImage = styled.Image`

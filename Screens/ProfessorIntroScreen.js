@@ -6,6 +6,7 @@ import { Audio } from 'expo-av'
 
 //images
 import SelectBackground from '../images/SelectBackground.png'
+import BackImage from '../images/BackArrow.png'
 import Oak from '../images/Oak.png'
 import TextBoxImage from '../images/TextBox.png'
 import BobberGif from '../images/Bobber.gif'
@@ -17,18 +18,21 @@ const ProfessorIntroScreen = ( { navigation }) => {
 
   useEffect(()=>{
     (async () => {
-            if (musicStatus) {
-                await sound.loadAsync(require('../audio/professorMusic.mp3'))
-                try {
-                    await sound.playAsync()
-                } catch (e) {
-                    console.log(e)
-                }
-            }else {
-                await sound.stopAsync()
-                await sound.unloadAsync()
-            }
-          })()
+      if (musicStatus) {
+          await sound.loadAsync(require('../audio/professorMusic.mp3'))
+
+          global.backgroundMusic = sound
+          
+          try {
+            await sound.playAsync()
+          } catch (e) {
+            console.log(e)
+          }
+      }else {
+        await sound.stopAsync()
+        await sound.unloadAsync()
+      }
+    })()
   },[musicStatus])
 
   async function onPressButton(){
@@ -57,11 +61,25 @@ const ProfessorIntroScreen = ( { navigation }) => {
 
   }
 
+  async function previousScreen(){
+
+    setMusicStatus(false)
+    await onPressButton()
+    navigation.goBack()
+
+  }
+
   return (
 
 		<MainView>
 
       <Background source={SelectBackground}> 
+
+      <BackArrowButton underlayColor={'transparent'} activeOpacity={1} onPress={()=>{previousScreen()}}>
+
+        <BackArrowImage source={BackImage}/>
+
+      </BackArrowButton>
 
         <OakImage source={Oak}></OakImage>
 
@@ -100,6 +118,20 @@ const Background = styled.ImageBackground`
   height:100%;
   display: flex;
   align-items: center;
+`
+
+const BackArrowButton = styled.TouchableHighlight`
+  width:50px
+  height:50px
+  position:absolute
+  z-index:4
+  top:4%
+  left:10px
+`
+
+const BackArrowImage = styled.Image`
+  width:100%;
+  height:100%;
 `
 
 const OakImage = styled.Image`
