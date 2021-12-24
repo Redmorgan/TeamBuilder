@@ -4,11 +4,85 @@ import styled from "styled-components/native";
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from '@expo/vector-icons';
 
+// components
+import SelectPokemonComponent from "../Components/SelectPokemonComponent";
+
+// images
 import BugType from '../images/types/Bug.png'
 import DarkType from '../images/types/Dark.png'
 
+const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
-const SelectTeamScreen = ({ navigation: { navigate } }) => {
+  var pokemonJson = [];
+
+  async function getPokedexData(){
+
+    var region = route.params.region
+
+    var pokemonDex = ""
+
+    if(region == "Kanto"){
+
+      pokemonDex = "/2/"
+
+    }else if(region == "Johto"){
+
+      pokemonDex = "/3/"
+
+    }else if(region == "Hoenn"){
+
+      pokemonDex = "/4/"
+
+    }else if(region == "Sinnoh"){
+
+      pokemonDex = "/5/"
+
+    }else if(region == "Unova"){
+
+      pokemonDex = "/8/"
+
+    }
+
+    var url = "https://pokeapi.co/api/v2/pokedex" + pokemonDex
+
+    return fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+
+      var pokedexJson = json["pokemon_entries"]
+
+      for (var i = 0; i < pokedexJson.length; i++){
+
+        var pokemon = pokedexJson[i]
+
+        pokemon = pokemon["pokemon_species"]
+
+        var speciesURL = pokemon["url"]
+
+        var splitURL = speciesURL.split("pokemon-species")
+
+        var pokemonEntryURL = "https://pokeapi.co/api/v2/pokemon" + splitURL[1]
+
+        pokemonJson.push(pokemonEntryURL)
+    
+      }
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  }
+
+  getPokedexData()
+
+  // async function getPokemonData(pokemonName){
+
+
+
+  // }
+
+
   return (
 
     <MainView>
@@ -41,12 +115,9 @@ const SelectTeamScreen = ({ navigation: { navigate } }) => {
 
       </SelectTeamHeader>
       
+      <SelectPokemonComponent/>
 
-      <PokemonFlatList>
-
-
-
-      </PokemonFlatList>
+      {/* <PokemonFlatList contentContainerStyle={{paddingBottom:10}}/> */}
 
     </MainView>
 
@@ -54,11 +125,13 @@ const SelectTeamScreen = ({ navigation: { navigate } }) => {
 }
 
 const MainView = styled.View`
+
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   background-color:#F5F5F5;
+
 `;
 
 const SelectTeamHeader = styled.View`
@@ -80,7 +153,6 @@ const RadialTouchable = styled.TouchableHighlight`
   top:30px
   right:5px
   border-radius:90px
-
 
 `
 
@@ -136,6 +208,7 @@ const PokemonFlatList = styled.FlatList`
   width:100%
   background-color:#F5F5F5
   z-index:-1
+  padding-top:10px
 
 `
 

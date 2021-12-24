@@ -27,7 +27,7 @@ const ProfessorOutroScreen = ({ route, navigation }) => {
     global.backgroundMusic.unloadAsync()
 
     onPressButton()
-    navigation.push('SelectTeam')
+    navigation.push('SelectTeam', {region:gameName})
 
   }
 
