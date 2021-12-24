@@ -44,7 +44,6 @@ const SelectGameScreen = ({ navigation }) => {
     function gotoOutro(){
 
         onPressButton();
-        console.log(selectionState)
         navigation.push('ProfessorOutro', {selectedGame:selectionState})
 
     }

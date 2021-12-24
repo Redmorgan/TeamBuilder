@@ -13,9 +13,24 @@ import DarkType from '../images/types/Dark.png'
 
 const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
-  var pokemonJson = [];
+  var pokemonData;
 
   async function getPokedexData(){
+
+    var pokemonDex = getDexNumber()
+
+    var url = "https://pokeapi.co/api/v2/pokedex" + pokemonDex
+
+    const pokedexJson = await getPokemonFromPokedex(url)
+
+    const pokemonURL_Json = getPokemonDataURLs(pokedexJson)
+
+    pokemonData = await getPokemonDataFromURLs(pokemonURL_Json)
+
+
+  }
+
+  function getDexNumber(){
 
     var region = route.params.region
 
@@ -43,45 +58,99 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
     }
 
-    var url = "https://pokeapi.co/api/v2/pokedex" + pokemonDex
-
-    return fetch(url)
-    .then((response) => response.json())
-    .then((json) => {
-
-      var pokedexJson = json["pokemon_entries"]
-
-      for (var i = 0; i < pokedexJson.length; i++){
-
-        var pokemon = pokedexJson[i]
-
-        pokemon = pokemon["pokemon_species"]
-
-        var speciesURL = pokemon["url"]
-
-        var splitURL = speciesURL.split("pokemon-species")
-
-        var pokemonEntryURL = "https://pokeapi.co/api/v2/pokemon" + splitURL[1]
-
-        pokemonJson.push(pokemonEntryURL)
-    
-      }
-
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    return pokemonDex
 
   }
 
+  const getPokemonFromPokedex = async (url) => {
+    try {
+      const response = await fetch(
+        url
+      );
+      const json = await response.json();
+      
+      return json["pokemon_entries"]
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function getPokemonDataURLs(pokedexData){
+
+    var pokemonURLs = []
+
+    for (var i = 0; i < 20; i++){
+
+      var pokemon = pokedexData[i]
+
+      pokemon = pokemon["pokemon_species"]
+
+      var speciesURL = pokemon["url"]
+
+      var splitURL = speciesURL.split("pokemon-species")
+
+      var pokemonEntryURL = "https://pokeapi.co/api/v2/pokemon" + splitURL[1]
+
+      pokemonURLs.push(pokemonEntryURL)
+  
+    }
+
+    return pokemonURLs
+
+  }
+
+  const getPokemonDataFromURLs = async (pokemonURL_Json) => {
+
+    var filteredPokemon = []
+
+    for (var i = 0; i < pokemonURL_Json.length; i++){
+
+      try {
+        const response = await fetch(
+          pokemonURL_Json[i]
+        );
+        const json = await response.json();
+        
+        var singlePokemon = {name:(json.name[0].toUpperCase() + json.name.substring(1)), types:sortTypeData(json.types), sprite:json.sprites.front_default, encounters:json.location_area_encounters}
+        filteredPokemon.push(singlePokemon)
+
+      } catch (error) {
+        console.error(error);
+      }
+
+    }
+
+    return filteredPokemon
+
+  }
+
+  function sortTypeData(typeObject){
+
+    var types = []
+
+    var type1 = typeObject[0].type.name
+
+    type1 = type1[0].toUpperCase() + type1.substring(1)
+
+    types.push(type1)
+
+    if(typeObject.length > 1){
+
+      var type2 = typeObject[1].type.name
+
+      type2 = type2[0].toUpperCase() + type2.substring(1)
+
+      types.push(type2)
+
+    }
+
+    return types
+
+  }
+
+
   getPokedexData()
-
-  // async function getPokemonData(pokemonName){
-
-
-
-  // }
-
 
   return (
 

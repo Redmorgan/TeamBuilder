@@ -22,6 +22,14 @@ const SelectPokemonComponent = () => {
 
         <PokemonNameLabel>Fletchinder</PokemonNameLabel>
 
+        <PokemonTypesContainer>
+
+          <PokemonType/>
+
+          <PokemonType style = {{marginLeft:5}}/>
+
+        </PokemonTypesContainer>
+
         <AddPokemonTouchable>
 
           <AddPokemonIcon/>
