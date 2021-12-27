@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { StatusBar } from 'expo-status-bar';
@@ -6,14 +6,31 @@ import { AntDesign } from '@expo/vector-icons';
 
 // components
 import SelectPokemonComponent from "../Components/SelectPokemonComponent";
+import LoadingComponent from "../Components/LoadingComponent";
 
 // images
 import BugType from '../images/types/Bug.png'
 import DarkType from '../images/types/Dark.png'
+import DragonType from '../images/types/Dragon.png'
+import ElectricType from '../images/types/Electric.png'
+import FairyType from '../images/types/Fighting.png'
+import FightingType from '../images/types/Fighting.png'
+import FireType from '../images/types/Fire.png'
+import FlyingType from '../images/types/Flying.png'
+import GhostType from '../images/types/Ghost.png'
+import GrassType from '../images/types/Grass.png'
+import GroundType from '../images/types/Ground.png'
+import IceType from '../images/types/Ice.png'
+import NormalType from '../images/types/Normal.png'
+import PoisonType from '../images/types/Poison.png'
+import PsychicType from '../images/types/Psychic.png'
+import RockType from '../images/types/Rock.png'
+import SteelType from '../images/types/Steel.png'
+import WaterType from '../images/types/Water.png'
 
 const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
-  var pokemonData;
+  const [finalPokemonData, setPokemonData] = useState()
 
   async function getPokedexData(){
 
@@ -25,8 +42,11 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
     const pokemonURL_Json = getPokemonDataURLs(pokedexJson)
 
-    pokemonData = await getPokemonDataFromURLs(pokemonURL_Json)
+    var pokemonData = await getPokemonDataFromURLs(pokemonURL_Json)
 
+    console.log(pokemonData)
+
+    setPokemonData(pokemonData)
 
   }
 
@@ -80,7 +100,7 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
     var pokemonURLs = []
 
-    for (var i = 0; i < 20; i++){
+    for (var i = 0; i < pokedexData.length; i++){
 
       var pokemon = pokedexData[i]
 
@@ -150,7 +170,13 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
   }
 
 
-  getPokedexData()
+  useEffect(()=>{
+    (async () => {
+
+      getPokedexData()
+
+    })()
+  },[])
 
   return (
 
@@ -179,14 +205,19 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
           </PokemonSearchBar>
 
           <AntDesign name="search1" size={40} color="black" />
+          
 
         </PokemonSearchBarContainer>
 
       </SelectTeamHeader>
       
-      <SelectPokemonComponent/>
-
-      {/* <PokemonFlatList contentContainerStyle={{paddingBottom:10}}/> */}
+      {(finalPokemonData == null)?
+      <LoadingComponent/>:
+      <PokemonFlatList
+        data = {finalPokemonData}
+        keyExtractor={(item) => item.name}
+        renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']}/>)}
+        contentContainerStyle={{paddingBottom:10}}/>}
 
     </MainView>
 

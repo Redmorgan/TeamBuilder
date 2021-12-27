@@ -3,16 +3,117 @@ import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
 
+// images
+import BugType from '../images/types/Bug.png'
+import DarkType from '../images/types/Dark.png'
+import DragonType from '../images/types/Dragon.png'
+import ElectricType from '../images/types/Electric.png'
+import FairyType from '../images/types/Fighting.png'
+import FightingType from '../images/types/Fighting.png'
+import FireType from '../images/types/Fire.png'
+import FlyingType from '../images/types/Flying.png'
+import GhostType from '../images/types/Ghost.png'
+import GrassType from '../images/types/Grass.png'
+import GroundType from '../images/types/Ground.png'
+import IceType from '../images/types/Ice.png'
+import NormalType from '../images/types/Normal.png'
+import PoisonType from '../images/types/Poison.png'
+import PsychicType from '../images/types/Psychic.png'
+import RockType from '../images/types/Rock.png'
+import SteelType from '../images/types/Steel.png'
+import WaterType from '../images/types/Water.png'
 
-const SelectPokemonComponent = () => {
+const SelectPokemonComponent = ({name, types}) => {
 
-    async function onPressButton(){
-        const { sound } = await Audio.Sound.createAsync(
-          require('../audio/pressSound.mp3')
-        );
-        await sound.playAsync()
-        Vibration.vibrate(5)
-      }
+  async function onPressButton(){
+    const { sound } = await Audio.Sound.createAsync(
+      require('../audio/pressSound.mp3')
+    );
+    await sound.playAsync()
+    Vibration.vibrate(5)
+  }
+
+  var typeImages = []
+
+  for(var i = 0; i < types.length; i++){
+
+    var type = types[i]
+
+    if(type == "Bug"){
+
+      typeImages.push(BugType)
+
+    }else if(type == "Dark"){
+
+      typeImages.push(DarkType)
+
+    }else if(type == "Dragon"){
+
+      typeImages.push(DragonType)
+
+    }else if(type == "Electric"){
+
+      typeImages.push(ElectricType)
+
+    }else if(type == "Fairy"){
+
+      typeImages.push(FairyType)
+
+    }else if(type == "Fighting"){
+
+      typeImages.push(FightingType)
+
+    }else if(type == "Fire"){
+
+      typeImages.push(FireType)
+
+    }else if(type == "Flying"){
+
+      typeImages.push(FlyingType)
+
+    }else if(type == "Ghost"){
+
+      typeImages.push(GhostType)
+
+    }else if(type == "Grass"){
+
+      typeImages.push(GrassType)
+
+    }else if(type == "Ground"){
+
+      typeImages.push(GroundType)
+
+    }else if(type == "Ice"){
+
+      typeImages.push(IceType)
+
+    }else if(type == "Normal"){
+
+      typeImages.push(NormalType)
+
+    }else if(type == "Poison"){
+
+      typeImages.push(PoisonType)
+
+    }else if(type == "Psychic"){
+
+      typeImages.push(PsychicType)
+
+    }else if(type == "Rock"){
+
+      typeImages.push(RockType)
+
+    }else if(type == "Steel"){
+
+      typeImages.push(SteelType)
+
+    }else if(type == "Water"){
+
+      typeImages.push(WaterType)
+
+    }
+
+  }
 
   return (
 
@@ -20,17 +121,17 @@ const SelectPokemonComponent = () => {
 
       <SelectPokemonWrapper>
 
-        <PokemonNameLabel>Fletchinder</PokemonNameLabel>
+        <PokemonNameLabel>{name}</PokemonNameLabel>
 
         <PokemonTypesContainer>
 
-          <PokemonType/>
+          <PokemonType source={typeImages[0]}/>
 
-          <PokemonType style = {{marginLeft:5}}/>
+          {(types.length == 2)?<PokemonType source={typeImages[1]} style = {{marginLeft:5}}/>:null}
 
         </PokemonTypesContainer>
 
-        <AddPokemonTouchable>
+        <AddPokemonTouchable onPress={() => {onPressButton()}}>
 
           <AddPokemonIcon/>
 
@@ -45,13 +146,15 @@ const SelectPokemonComponent = () => {
 
 const SelectPokemonTouchable = styled.TouchableHighlight`
 
-  width: 97.5%;
+  width: 95%;
   height:80px
   border: 3px solid #000000
   border-top-left-radius:20px
   border-bottom-left-radius:20px
   border-top-right-radius:90px
   border-bottom-right-radius:90px
+  margin-left:2.5%
+  margin-bottom:2%
 
 `;
 
@@ -80,6 +183,7 @@ const PokemonNameLabel = styled.Text`
   font-size:45px
   font-family:PokemonStyle
   margin-left:10px
+  width:45%
 
 `
 
@@ -88,7 +192,6 @@ const PokemonType = styled.Image`
   height:50px
   width:50px
   border-radius:90px
-  background-color:black
 
 `
 
