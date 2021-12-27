@@ -132,7 +132,23 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
         );
         const json = await response.json();
         
-        var singlePokemon = {name:(json.name[0].toUpperCase() + json.name.substring(1)), types:sortTypeData(json.types), sprite:json.sprites.front_default, encounters:json.location_area_encounters}
+        var pokemonName = json.name
+
+        if(pokemonName.includes("deoxys")){
+
+          pokemonName = "deoxys"
+
+        }else if(pokemonName.includes("-m")){
+
+          pokemonName = pokemonName.replace("-m", " ♂")
+
+        }else if(pokemonName.includes("-f")){
+
+          pokemonName = pokemonName.replace("-f", " ♀")
+
+        }
+
+        var singlePokemon = {name:(pokemonName[0].toUpperCase() + pokemonName.substring(1)), types:sortTypeData(json.types), sprite:json.sprites.front_default, encounters:json.location_area_encounters}
         filteredPokemon.push(singlePokemon)
 
       } catch (error) {
