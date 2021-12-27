@@ -100,7 +100,7 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
     var pokemonURLs = []
 
-    for (var i = 0; i < pokedexData.length; i++){
+    for (var i = 0; i < 10; i++){
 
       var pokemon = pokedexData[i]
 
@@ -232,7 +232,7 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
       <PokemonFlatList
         data = {finalPokemonData}
         keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']}/>)}
+        renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']} spriteURL={item['sprite']}/>)}
         contentContainerStyle={{paddingBottom:10}}/>}
 
     </MainView>

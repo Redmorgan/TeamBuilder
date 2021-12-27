@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }  from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
@@ -23,7 +23,7 @@ import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
 
-const SelectPokemonComponent = ({name, types}) => {
+const SelectPokemonComponent = ({name, types, spriteURL}) => {
 
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
@@ -33,7 +33,16 @@ const SelectPokemonComponent = ({name, types}) => {
     Vibration.vibrate(5)
   }
 
+  function expandPokemonData(){
+
+    onPressButton()
+    openPokemonData(!dataState)
+
+  }
+
   var typeImages = []
+
+  const [dataState, openPokemonData] = useState(false)
 
   for(var i = 0; i < types.length; i++){
 
@@ -117,25 +126,36 @@ const SelectPokemonComponent = ({name, types}) => {
 
   return (
 
-    <SelectPokemonTouchable onPress={() => {onPressButton()}} underlayColor={'transparent'} activeOpacity={1}>
+    <SelectPokemonTouchable onPress={() => {expandPokemonData()}} underlayColor={'transparent'} activeOpacity={1}>
 
       <SelectPokemonWrapper>
 
-        <PokemonNameLabel>{name}</PokemonNameLabel>
+        <SelectPokemonRow>
 
-        <PokemonTypesContainer>
+          <PokemonNameLabel>{name}</PokemonNameLabel>
 
-          <PokemonType source={typeImages[0]}/>
+          <PokemonTypesContainer>
 
-          {(types.length == 2)?<PokemonType source={typeImages[1]} style = {{marginLeft:5}}/>:null}
+            <PokemonType source={typeImages[0]}/>
 
-        </PokemonTypesContainer>
+            {(types.length == 2)?<PokemonType source={typeImages[1]} style = {{marginLeft:5}}/>:null}
 
-        <AddPokemonTouchable onPress={() => {onPressButton()}}>
+          </PokemonTypesContainer>
 
-          <AddPokemonIcon/>
+          <AddPokemonTouchable onPress={() => {onPressButton()}}>
 
-        </AddPokemonTouchable>
+            <AddPokemonIcon/>
+
+          </AddPokemonTouchable>
+
+        </SelectPokemonRow>
+        
+        {(dataState)?
+        <SelectPokemonExpand>
+
+          <PokemonSprite source={{uri:spriteURL}}/>
+
+        </SelectPokemonExpand>:null}
 
       </SelectPokemonWrapper>
 
@@ -147,12 +167,6 @@ const SelectPokemonComponent = ({name, types}) => {
 const SelectPokemonTouchable = styled.TouchableHighlight`
 
   width: 95%;
-  height:80px
-  border: 3px solid #000000
-  border-top-left-radius:20px
-  border-bottom-left-radius:20px
-  border-top-right-radius:90px
-  border-bottom-right-radius:90px
   margin-left:2.5%
   margin-bottom:2%
 
@@ -161,10 +175,21 @@ const SelectPokemonTouchable = styled.TouchableHighlight`
 const SelectPokemonWrapper = styled.View`
 
   width:100%
-  height:100%
+
+`
+
+const SelectPokemonRow = styled.View`
+
+  width: 100%
+  height: 80px
   display: flex;
   align-items: center;
   flex-direction:row
+  border: 3px solid #000000
+  border-top-left-radius:20px
+  border-bottom-left-radius:20px
+  border-top-right-radius:90px
+  border-bottom-right-radius:90px
 
 `
 
@@ -210,6 +235,32 @@ const AddPokemonIcon = styled.Image`
 
   width:100%
   height:100%
+
+`
+
+const SelectPokemonExpand = styled.View`
+
+  width:88.5%
+  height:140px
+  margin-left:2%
+  border-bottom-left-radius:20px
+  border-bottom-right-radius:20px
+  border-right-color:#000000
+  border-left-color:#000000
+  border-bottom-color:#000000
+  border-right-width:3px
+  border-left-width:3px
+  border-bottom-width:3px
+  display: flex;
+  flex-direction:row
+  align-items:center
+
+`
+
+const PokemonSprite = styled.Image`
+
+  width:100px
+  height:100px
 
 `
 
