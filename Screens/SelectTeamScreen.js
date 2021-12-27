@@ -44,8 +44,6 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
     var pokemonData = await getPokemonDataFromURLs(pokemonURL_Json)
 
-    console.log(pokemonData)
-
     setPokemonData(pokemonData)
 
   }
