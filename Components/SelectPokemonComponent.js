@@ -23,7 +23,7 @@ import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
 
-const SelectPokemonComponent = ({name, types, spriteURL}) => {
+const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) => {
 
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
@@ -33,16 +33,143 @@ const SelectPokemonComponent = ({name, types, spriteURL}) => {
     Vibration.vibrate(5)
   }
 
-  function expandPokemonData(){
+  const [dataState, openPokemonData] = useState(false)
+  const [locationData, setLocationData] = useState()
+  const [flavorText, setFlavourText] = useState()
+  const [pokemonTab, setPokemonTab] = useState(true)
+
+  async function expandPokemonData(){
+
+    var spawnLocation;
 
     onPressButton()
+
+    if(locationData == null){
+
+      setLocationData(await loadEncounterData())
+
+      setFlavourText(await loadFlavourText())
+
+    }
+
     openPokemonData(!dataState)
 
   }
 
-  var typeImages = []
+  async function loadEncounterData(){
 
-  const [dataState, openPokemonData] = useState(false)
+
+    try {
+      const response = await fetch(
+        encounterURL
+      );
+      const json = await response.json();
+      
+      var encounterData = json;
+
+      var locations = []
+        
+      if(JSON.stringify(encounterData) == "[]"){
+
+        locations.push("Only obtainable through evolution or special events.")
+
+      }else{
+
+        for(var i = 0; i < encounterData.length; i++){
+
+          var encounterObj = encounterData[i]
+
+          var versionDetails = encounterObj["version_details"]
+
+          for(var k = 0; k < versionDetails.length; k++){
+
+            var versionObj = versionDetails[k]
+
+            if(versionObj["version"]["name"] == game){
+
+              var foundLocation = formatLocationString(encounterObj["location_area"]["name"])
+
+              locations.push(foundLocation)
+
+            }
+
+          }
+  
+        }
+
+      }
+
+      return locations
+
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+  function formatLocationString(locationString){
+
+
+    // locationString = locationString.split("-")
+    // locationString.shift()
+    
+    // locationString = locationString.join("-")
+    locationString = locationString.replace("-area","")
+    locationString = locationString.replace(/-/g, " ")
+
+    locationString = locationString[0].toUpperCase() + locationString.substring(1)
+
+    return locationString
+
+  }
+
+  async function loadFlavourText(){
+
+    var pokemonNumberArr = encounterURL.split("pokemon/")
+
+    const pokemonSplit = pokemonNumberArr[1]
+
+    pokemonNumberArr = pokemonSplit.split("/")
+
+    const pokemonNumber = pokemonNumberArr[0]
+
+    try {
+      const response = await fetch(
+        "https://pokeapi.co/api/v2/pokemon-species/" + pokemonNumber
+      );
+      const json = await response.json();
+      
+      const flavourData = json["flavor_text_entries"];
+
+      for(var i = 0; i < flavourData.length; i++){
+
+        var flavourObj = flavourData[i]
+
+        if(flavourObj["language"]["name"] == "en" && flavourObj["version"]["name"] == game){
+
+          //console.log(flavourObj["flavor_text"])
+          
+          var flavourString = JSON.stringify(flavourObj["flavor_text"])
+
+          flavourString = flavourString.replace(/\\n/g, " ")
+
+          flavourString = flavourString.replace(/\\f/g, " ")
+
+          console.log(flavourString)
+
+          return flavourString
+
+        }
+
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+  var typeImages = []
 
   for(var i = 0; i < types.length; i++){
 
@@ -126,45 +253,83 @@ const SelectPokemonComponent = ({name, types, spriteURL}) => {
 
   return (
 
-    <SelectPokemonTouchable onPress={() => {expandPokemonData()}} underlayColor={'transparent'} activeOpacity={1}>
+    <SelectPokemonContainer>
 
       <SelectPokemonWrapper>
 
-        <SelectPokemonRow>
+        <SelectPokemonRowTouchable onPress={() => {expandPokemonData()}} underlayColor={'transparent'} activeOpacity={1}>
 
-          <PokemonNameLabel>{name}</PokemonNameLabel>
+          <SelectPokemonRowWrapper>
 
-          <PokemonTypesContainer>
+            <PokemonNameLabel>{name}</PokemonNameLabel>
 
-            <PokemonType source={typeImages[0]}/>
+            <PokemonTypesContainer>
 
-            {(types.length == 2)?<PokemonType source={typeImages[1]} style = {{marginLeft:5}}/>:null}
+              <PokemonType source={typeImages[0]}/>
 
-          </PokemonTypesContainer>
+              {(types.length == 2)?<PokemonType source={typeImages[1]} style = {{marginLeft:5}}/>:null}
 
-          <AddPokemonTouchable onPress={() => {onPressButton()}}>
+            </PokemonTypesContainer>
 
-            <AddPokemonIcon/>
+            <AddPokemonTouchable onPress={() => {onPressButton()}}>
 
-          </AddPokemonTouchable>
+              <AddPokemonIcon/>
 
-        </SelectPokemonRow>
+            </AddPokemonTouchable>
+
+          </SelectPokemonRowWrapper>
+
+        </SelectPokemonRowTouchable>
         
         {(dataState)?
         <SelectPokemonExpand>
 
           <PokemonSprite source={{uri:spriteURL}}/>
 
+          <PokemonDataContainer>
+
+            {(pokemonTab)?<PokemonFlavourText>{flavorText}</PokemonFlavourText>:null}
+
+            {(!pokemonTab)?
+
+            <LocationFlatListContainer>
+              <LocationFlatList
+                data = {locationData}
+                keyExtractor={(item) => item}
+                nestedScrollEnabled
+                renderItem={({ item }) => (<LocationLabel>{item}</LocationLabel>)}
+                contentContainerStyle={{paddingBottom:10}}/>
+            </LocationFlatListContainer>
+              :null}
+            
+            <PokemonDataTabs>
+
+              <PokemonDescriptionButton onPress={()=>{setPokemonTab(true)}} underlayColor={'#ed1e24'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#c2191e":"#ed1e24"}}>
+
+                <ButtonLabel>Desc</ButtonLabel>
+
+              </PokemonDescriptionButton>
+
+              <PokemonLocationButton onPress={()=>{setPokemonTab(false)}} underlayColor={'#ed1e24'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#ed1e24":"#c2191e"}}>
+
+                <ButtonLabel>Locations</ButtonLabel>
+
+              </PokemonLocationButton>
+
+            </PokemonDataTabs>
+
+          </PokemonDataContainer>
+
         </SelectPokemonExpand>:null}
 
       </SelectPokemonWrapper>
 
-    </SelectPokemonTouchable>
+    </SelectPokemonContainer>
 
   );
 }
 
-const SelectPokemonTouchable = styled.TouchableHighlight`
+const SelectPokemonContainer = styled.View`
 
   width: 95%;
   margin-left:2.5%
@@ -178,18 +343,25 @@ const SelectPokemonWrapper = styled.View`
 
 `
 
-const SelectPokemonRow = styled.View`
+const SelectPokemonRowTouchable = styled.TouchableHighlight`
 
   width: 100%
   height: 80px
-  display: flex;
-  align-items: center;
-  flex-direction:row
   border: 3px solid #000000
   border-top-left-radius:20px
   border-bottom-left-radius:20px
   border-top-right-radius:90px
   border-bottom-right-radius:90px
+
+`
+
+const SelectPokemonRowWrapper = styled.View`
+
+  width:100%
+  height:100%
+  display: flex;
+  align-items: center;
+  flex-direction:row
 
 `
 
@@ -241,7 +413,7 @@ const AddPokemonIcon = styled.Image`
 const SelectPokemonExpand = styled.View`
 
   width:88.5%
-  height:140px
+  height:160px
   margin-left:2%
   border-bottom-left-radius:20px
   border-bottom-right-radius:20px
@@ -259,8 +431,91 @@ const SelectPokemonExpand = styled.View`
 
 const PokemonSprite = styled.Image`
 
-  width:100px
-  height:100px
+  width:120px
+  height:120px
+
+`
+
+const PokemonDataContainer = styled.View`
+
+  width:64.6%
+  height:100%
+
+`
+
+const PokemonFlavourText = styled.Text`
+  width:100%
+  height:70%
+  font-family:PokemonStyle
+  font-size:19px
+  padding-top:10px
+  text-align:justify
+  padding-right:10px
+  line-height:18px
+
+`
+
+const LocationFlatListContainer = styled.View`
+  height:70%
+  width:100%
+  display:flex
+
+`
+
+const LocationFlatList = styled.FlatList`
+
+  height:90%
+  padding-top:10px
+
+`
+
+const PokemonDataTabs = styled.View`
+
+  width:100%
+  height:25%
+  display:flex
+  flex-direction:row
+  justify-content:space-around
+
+`
+
+const PokemonDescriptionButton = styled.TouchableHighlight`
+
+  height:100%
+  width:40%
+  background-color:#ed1e24
+  display:flex
+  justify-content:center
+  align-items:center
+  border-radius:5px
+  border: 1px solid #000000
+
+`
+
+const PokemonLocationButton = styled.TouchableHighlight`
+
+  height:100%
+  width:40%
+  background-color:#ed1e24
+  display:flex
+  justify-content:center
+  align-items:center
+  border-radius:5px
+  border: 1px solid #000000
+
+`
+
+const ButtonLabel = styled.Text`
+
+  font-family:PokemonStyle
+  font-size:20px
+
+`
+
+const LocationLabel = styled.Text`
+
+  font-family:PokemonStyle
+  font-size:20px
 
 `
 

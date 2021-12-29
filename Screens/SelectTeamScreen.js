@@ -28,7 +28,7 @@ import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
 
-const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
+const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
 
   const [finalPokemonData, setPokemonData] = useState()
 
@@ -146,7 +146,7 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
 
         }
 
-        var singlePokemon = {name:(pokemonName[0].toUpperCase() + pokemonName.substring(1)), types:sortTypeData(json.types), sprite:json.sprites.front_default, encounters:json.location_area_encounters}
+        var singlePokemon = {name:(pokemonName[0].toUpperCase() + pokemonName.substring(1)), types:sortTypeData(json.types), sprite:json.sprites.front_default, encounterURL:json.location_area_encounters}
         filteredPokemon.push(singlePokemon)
 
       } catch (error) {
@@ -230,7 +230,8 @@ const SelectTeamScreen = ({ navigation: { navigate }, route }) => {
       <PokemonFlatList
         data = {finalPokemonData}
         keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']} spriteURL={item['sprite']}/>)}
+        nestedScrollEnabled
+        renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']} spriteURL={item['sprite']} encounterURL={item['encounterURL']} game={route.params.game}/>)}
         contentContainerStyle={{paddingBottom:10}}/>}
 
     </MainView>
