@@ -40,8 +40,6 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) =>
 
   async function expandPokemonData(){
 
-    var spawnLocation;
-
     onPressButton()
 
     if(locationData == null){
@@ -109,11 +107,6 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) =>
 
   function formatLocationString(locationString){
 
-
-    // locationString = locationString.split("-")
-    // locationString.shift()
-    
-    // locationString = locationString.join("-")
     locationString = locationString.replace("-area","")
     locationString = locationString.replace(/-/g, " ")
 
@@ -146,16 +139,12 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) =>
         var flavourObj = flavourData[i]
 
         if(flavourObj["language"]["name"] == "en" && flavourObj["version"]["name"] == game){
-
-          //console.log(flavourObj["flavor_text"])
           
           var flavourString = JSON.stringify(flavourObj["flavor_text"])
 
           flavourString = flavourString.replace(/\\n/g, " ")
 
           flavourString = flavourString.replace(/\\f/g, " ")
-
-          console.log(flavourString)
 
           return flavourString
 
@@ -166,6 +155,20 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) =>
     } catch (error) {
       console.error(error);
     }
+
+  }
+
+  function openDescription(){
+
+    onPressButton()
+    setPokemonTab(true)
+
+  }
+
+  function openLocations(){
+
+    onPressButton()
+    setPokemonTab(false)
 
   }
 
@@ -304,13 +307,13 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) =>
             
             <PokemonDataTabs>
 
-              <PokemonDescriptionButton onPress={()=>{setPokemonTab(true)}} underlayColor={'#ed1e24'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#c2191e":"#ed1e24"}}>
+              <PokemonDescriptionButton onPress={()=>{openDescription()}} underlayColor={'#ed1e24'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#c2191e":"#ed1e24"}}>
 
                 <ButtonLabel>Desc</ButtonLabel>
 
               </PokemonDescriptionButton>
 
-              <PokemonLocationButton onPress={()=>{setPokemonTab(false)}} underlayColor={'#ed1e24'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#ed1e24":"#c2191e"}}>
+              <PokemonLocationButton onPress={()=>{openLocations()}} underlayColor={'#ed1e24'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#ed1e24":"#c2191e"}}>
 
                 <ButtonLabel>Locations</ButtonLabel>
 

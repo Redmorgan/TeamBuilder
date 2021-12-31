@@ -3,10 +3,13 @@ import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from '@expo/vector-icons';
+import { Audio } from 'expo-av'
 
 // components
 import SelectPokemonComponent from "../Components/SelectPokemonComponent";
 import LoadingComponent from "../Components/LoadingComponent";
+import PokedexComponent from "../Components/PokedexComponent";
+import NewTeamManagerComponent from "../Components/NewTeamManagerComponent";
 
 // images
 import BugType from '../images/types/Bug.png'
@@ -27,8 +30,12 @@ import PsychicType from '../images/types/Psychic.png'
 import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
+import pokedexIcon from '../images/pokedexIcon.png'
+import pokeballsIcon from '../images/pokeballsIcon.png'
 
 const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
+
+  const [currentTab, setCurrentTab] = useState(true)
 
   const [finalPokemonData, setPokemonData] = useState()
 
@@ -183,7 +190,6 @@ const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
 
   }
 
-
   useEffect(()=>{
     (async () => {
 
@@ -192,47 +198,65 @@ const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
     })()
   },[])
 
+  async function onPressButton(){
+    const { sound } = await Audio.Sound.createAsync(
+      require('../audio/pressSound.mp3')
+    );
+    await sound.playAsync()
+    Vibration.vibrate(5)
+  }
+
+  function openPokedexTab(){
+
+    onPressButton()
+    setCurrentTab(true)
+
+  }
+
+  function openManageTeamTab(){
+
+    onPressButton()
+    setCurrentTab(false)
+
+  }
+
+
   return (
 
     <MainView>
 
       <StatusBar backgroundColor="#ed1e24" style="inverted" />
 
-      <SelectTeamHeader>
+      {(currentTab)?
+        <PokedexComponent regionData = {route.params.region} game = {route.params.game} finalPokemonData={finalPokemonData}/>:<NewTeamManagerComponent></NewTeamManagerComponent>}
 
-        <RadialTouchable onPress={()=>{Vibration.vibrate(8)}} activeOpacity={1}>
+      <SelectTeamTabControls>
 
-          <TypeSelectRadial>
+        <SelectTeamTabButton style={{borderRightWidth:1, borderRightColor:"#000000"}} onPress={()=>{openPokedexTab()}} underlayColor={'#ed1e24'} activeOpacity={1}>
 
-            <TypeSelectImage source={DarkType}/>
+          <ButtonWrapper>
 
-            {/* <AntDesign name="filter" size={50} color="black" /> */}
+            <TabIconImage style={{opacity: currentTab ? 1:0.7}} source={pokedexIcon}/>
 
-          </TypeSelectRadial>
+            <TabLabel>Pokedex</TabLabel>
 
-        </RadialTouchable>
+          </ButtonWrapper>
 
-        <PokemonSearchBarContainer>
+        </SelectTeamTabButton>
 
-          <PokemonSearchBar>
-
-          </PokemonSearchBar>
-
-          <AntDesign name="search1" size={40} color="black" />
+        <ManageTeamTabButton style={{borderLeftWidth:1, borderLeftColor:"#000000"}} onPress={()=>{openManageTeamTab()}} underlayColor={'#ed1e24'} activeOpacity={1}>
           
+          <ButtonWrapper>
 
-        </PokemonSearchBarContainer>
+            <TabIconImage style={{opacity: currentTab == false ? 1:0.7}} source={pokeballsIcon}/>
 
-      </SelectTeamHeader>
-      
-      {(finalPokemonData == null)?
-      <LoadingComponent/>:
-      <PokemonFlatList
-        data = {finalPokemonData}
-        keyExtractor={(item) => item.name}
-        nestedScrollEnabled
-        renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']} spriteURL={item['sprite']} encounterURL={item['encounterURL']} game={route.params.game}/>)}
-        contentContainerStyle={{paddingBottom:10}}/>}
+            <TabLabel>Manage Team</TabLabel>
+
+          </ButtonWrapper>
+
+        </ManageTeamTabButton>
+
+      </SelectTeamTabControls>
 
     </MainView>
 
@@ -247,83 +271,57 @@ const MainView = styled.View`
   align-items: center;
   background-color:#F5F5F5;
 
-`;
+`
 
-const SelectTeamHeader = styled.View`
+const SelectTeamTabControls = styled.View`
 
   width:100%
-  height:100px
+  height:8%
   background-color:#ed1e24
-  border-bottom-width: 4px;
-  border-bottom-color: #000000
-
-`
-
-const RadialTouchable = styled.TouchableHighlight`
-
-  width:100px
-  height:100px
   position:absolute
-  z-index:10
-  top:30px
-  right:5px
-  border-radius:90px
+  bottom:0
+  border-top-width: 4px;
+  border-top-color: #000000
+  display:flex
+  flex-direction:row
 
 `
 
-const TypeSelectRadial = styled.View`
+const SelectTeamTabButton = styled.TouchableHighlight`
 
-  width:100%
+  width:50%
   height:100%
-  background-color:#ffffff
-  border-radius:90px
-  border: 4px solid #000000
-  display: flex;
-  align-items: center;
+
+`
+
+const ManageTeamTabButton = styled.TouchableHighlight`
+
+  width:50%
+  height:100%
+
+`
+
+const ButtonWrapper = styled.View`
+
+  height:100%
+  width:100%
+  display:flex
+  align-items:center
   justify-content:center
 
 `
 
-const TypeSelectImage = styled.Image`
+const TabIconImage = styled.Image`
 
-  width:93px
-  height:93px
-  border-radius:90px
-
-`
-
-const PokemonSearchBarContainer = styled.View`
-
-  width:69%
-  height:55px
-  background-color:#ffffff
-  margin-top:35px
-  margin-left:3%
-  border-radius:10px
-  border: 2px solid #000000
-  display:flex;
-  flex-direction:row;
-  align-items:center
+  width:32px
+  height:32px
 
 `
 
-const PokemonSearchBar = styled.TextInput`
+const TabLabel = styled.Text`
 
-  border-radius:8px
-  font-size:40px
-  padding-left:10px
-  height:100%;
-  width:85%
   font-family:PokemonStyle
-
-`
-
-const PokemonFlatList = styled.FlatList`
-
-  width:100%
-  background-color:#F5F5F5
-  z-index:-1
-  padding-top:10px
+  font-size:25px
 
 `
 
