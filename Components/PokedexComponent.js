@@ -7,13 +7,14 @@ import { AntDesign } from '@expo/vector-icons';
 // components
 import SelectPokemonComponent from "../Components/SelectPokemonComponent";
 import LoadingComponent from "../Components/LoadingComponent";
+import TypeFilterModalComponent from "./TypeFilterModalComponent";
 
 // images
 import BugType from '../images/types/Bug.png'
 import DarkType from '../images/types/Dark.png'
 import DragonType from '../images/types/Dragon.png'
 import ElectricType from '../images/types/Electric.png'
-import FairyType from '../images/types/Fighting.png'
+import FairyType from '../images/types/Fairy.png'
 import FightingType from '../images/types/Fighting.png'
 import FireType from '../images/types/Fire.png'
 import FlyingType from '../images/types/Flying.png'
@@ -32,34 +33,67 @@ import pokeballsIcon from '../images/pokeballsIcon.png'
 
 const PokedexComponent = ({ game, finalPokemonData }) => {
 
+    const[pokedexData, setPokedexData] = useState()
+
+    const[filterState, setFilterState] = useState(false)
+
+    useEffect(()=>{
+        (async () => {
+
+            if(finalPokemonData != null){
+
+                setPokedexData(finalPokemonData)
+
+            }
+
+        })()
+      },[finalPokemonData])
+
+    const filterPokedex = searchString => {
+
+        if(finalPokemonData != null){
+
+            var filteredPokedexData = finalPokemonData.filter(function (pokemon) {
+
+                return pokemon.name.includes(searchString)
+
+            })
+
+            setPokedexData(filteredPokedexData)
+
+        }
+
+    }
+
   return (
 
     <MainView>
 
         <SelectTeamHeader>
 
-          <RadialTouchable onPress={()=>{Vibration.vibrate(8)}} activeOpacity={1}>
+            <TypeFilterModalComponent state={filterState} closeFilterOverlay={() => {setFilterState(false)}}/>
+
+            <RadialTouchable onPress={()=>{Vibration.vibrate(8); setFilterState(true)}} activeOpacity={1}>
 
             <TypeSelectRadial>
 
-              <TypeSelectImage source={DarkType}/>
+                <TypeSelectImage source={DarkType}/>
 
-              {/* <AntDesign name="filter" size={50} color="black" /> */}
+                {/* <AntDesign name="filter" size={50} color="black" /> */}
 
             </TypeSelectRadial>
 
-          </RadialTouchable>
+            </RadialTouchable>
 
-          <PokemonSearchBarContainer>
+            <PokemonSearchBarContainer>
 
-            <PokemonSearchBar>
-
-            </PokemonSearchBar>
+            <PokemonSearchBar
+                onChangeText={text => filterPokedex(text)}/>
 
             <AntDesign name="search1" size={40} color="black" />
             
 
-          </PokemonSearchBarContainer>
+            </PokemonSearchBarContainer>
 
         </SelectTeamHeader>
         
@@ -69,7 +103,7 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
         <PokemonFlatListContainer>
 
           <PokemonFlatList
-            data = {finalPokemonData}
+            data = {pokedexData}
             keyExtractor={(item) => item.name}
             nestedScrollEnabled
             renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']} spriteURL={item['sprite']} encounterURL={item['encounterURL']} game={game}/>)}

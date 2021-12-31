@@ -228,7 +228,8 @@ const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
       <StatusBar backgroundColor="#ed1e24" style="inverted" />
 
       {(currentTab)?
-        <PokedexComponent regionData = {route.params.region} game = {route.params.game} finalPokemonData={finalPokemonData}/>:<NewTeamManagerComponent></NewTeamManagerComponent>}
+        <PokedexComponent regionData = {route.params.region} game = {route.params.game} finalPokemonData={finalPokemonData}/>:
+        <NewTeamManagerComponent/>}
 
       <SelectTeamTabControls>
 

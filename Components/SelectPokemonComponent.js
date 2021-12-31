@@ -8,7 +8,7 @@ import BugType from '../images/types/Bug.png'
 import DarkType from '../images/types/Dark.png'
 import DragonType from '../images/types/Dragon.png'
 import ElectricType from '../images/types/Electric.png'
-import FairyType from '../images/types/Fighting.png'
+import FairyType from '../images/types/Fairy.png'
 import FightingType from '../images/types/Fighting.png'
 import FireType from '../images/types/Fire.png'
 import FlyingType from '../images/types/Flying.png'
@@ -22,6 +22,7 @@ import PsychicType from '../images/types/Psychic.png'
 import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
+import AddIcon from '../images/addIcon.png'
 
 const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) => {
 
@@ -274,9 +275,9 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) =>
 
             </PokemonTypesContainer>
 
-            <AddPokemonTouchable onPress={() => {onPressButton()}}>
+            <AddPokemonTouchable onPress={() => {onPressButton()}} underlayColor={'transparent'} activeOpacity={1}>
 
-              <AddPokemonIcon/>
+              <AddPokemonIcon source={AddIcon}/>
 
             </AddPokemonTouchable>
 
@@ -400,7 +401,6 @@ const AddPokemonTouchable = styled.TouchableHighlight`
   width:50px
   height:50px
   border-radius:90px
-  background-color:pink
   position:absolute
   right:15px
 
