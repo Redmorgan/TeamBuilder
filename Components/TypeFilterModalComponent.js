@@ -25,7 +25,7 @@ import WaterType from '../images/types/Water.png'
 import pokedexIcon from '../images/pokedexIcon.png'
 import pokeballsIcon from '../images/pokeballsIcon.png'
 
-const TypeFilterModalComponent = ({ state, closeFilterOverlay }) => {
+const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
     async function onPressButton(){
         const { sound } = await Audio.Sound.createAsync(
@@ -35,9 +35,20 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay }) => {
         Vibration.vibrate(5)
     }
 
+    const[selectedType, selectType] = useState()
+
+    function selectTypeFilter(type){
+
+        onPressButton()
+        selectType(type)
+
+    }
+
     function cancelFilter(){
 
         onPressButton()
+
+        setFilter("none")
 
         closeFilterOverlay()
 
@@ -46,6 +57,10 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay }) => {
     function confirmFilter(){
 
         onPressButton()
+
+        //setFilter(selectedType)
+
+        setFilter(selectedType)
 
         closeFilterOverlay()
 
@@ -66,109 +81,109 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay }) => {
 
                 <TypeContainer>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("bug")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={BugType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("dark")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={DarkType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("dragon")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={DragonType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("electric")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={ElectricType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("fairy")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={FairyType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("fighting")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={FightingType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("fire")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={FireType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("flying")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={FlyingType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("ghost")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={GhostType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("grass")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={GrassType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("ground")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={GroundType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("ice")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={IceType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("normal")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={NormalType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("poison")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={PoisonType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("psychic")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={PsychicType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("rock")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={RockType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("steel")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={SteelType}/>
 
                     </TypeButton>
 
-                    <TypeButton>
+                    <TypeButton onPress={() => {selectTypeFilter("water")}} underlayColor={'transparent'} activeOpacity={1}>
 
                         <TypeImage source={WaterType}/>
 

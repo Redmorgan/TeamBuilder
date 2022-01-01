@@ -33,37 +33,172 @@ import pokeballsIcon from '../images/pokeballsIcon.png'
 
 const PokedexComponent = ({ game, finalPokemonData }) => {
 
-    const[pokedexData, setPokedexData] = useState()
+  const[pokedexData, setPokedexData] = useState([])
 
-    const[filterState, setFilterState] = useState(false)
+  const[filterState, setFilterState] = useState(false)
 
-    useEffect(()=>{
-        (async () => {
+  const[currentFilter, setCurrentFilter] = useState("none")
 
-            if(finalPokemonData != null){
+  var isLoaded = false
 
-                setPokedexData(finalPokemonData)
+  useEffect(()=>{
+    (async () => {
 
-            }
+      if(finalPokemonData != null && isLoaded == false){
 
-        })()
-      },[finalPokemonData])
+        setPokedexData(finalPokemonData)
 
-    const filterPokedex = searchString => {
+        isLoaded = true
 
-        if(finalPokemonData != null){
+      }
 
-            var filteredPokedexData = finalPokemonData.filter(function (pokemon) {
+    })()
+  },[finalPokemonData])
 
-                return pokemon.name.includes(searchString)
 
-            })
+  
+  function filterPokedex(searchString) {
 
-            setPokedexData(filteredPokedexData)
+    if(finalPokemonData != null){  
 
-        }
+      var filteredPokedexData;
+      if(currentFilter == "none"){
+
+        filteredPokedexData = finalPokemonData.filter(function (pokemon) {
+          
+          return pokemon.name.includes(searchString)
+
+        })
+
+      }else{
+
+        filteredPokedexData = finalPokemonData.filter(function (pokemon) {
+          
+          if(pokemon.types.length == 1){
+
+            return pokemon.name.includes(searchString) && pokemon.types[0].toUpperCase() == currentFilter.toUpperCase()
+    
+          }else if(pokemon.types.length == 2){
+    
+            return pokemon.name.includes(searchString) && (pokemon.types[0].toUpperCase() == currentFilter.toUpperCase() || pokemon.types[1].toUpperCase() == currentFilter.toUpperCase())
+    
+          }
+
+        })
+
+
+      } 
+
+      setPokedexData(filteredPokedexData)
 
     }
+
+  }
+
+  function getTypeImage(type){
+
+    if(type == "bug"){
+
+      return BugType
+
+    }else if(type == "dark"){
+
+      return DarkType
+
+    }else if(type == "dragon"){
+
+      return DragonType
+
+    }else if(type == "electric"){
+
+      return ElectricType
+
+    }else if(type == "fairy"){
+
+      return FairyType
+
+    }else if(type == "fighting"){
+
+      return FightingType
+
+    }else if(type == "fire"){
+
+      return FireType
+
+    }else if(type == "flying"){
+
+      return FlyingType
+
+    }else if(type == "ghost"){
+
+      return GhostType
+
+    }else if(type == "grass"){
+
+      return GrassType
+
+    }else if(type == "ground"){
+
+      return GroundType
+
+    }else if(type == "ice"){
+
+      return IceType
+
+    }else if(type == "normal"){
+
+      return NormalType
+
+    }else if(type == "poison"){
+
+      return PoisonType
+
+    }else if(type == "psychic"){
+
+      return PsychicType
+
+    }else if(type == "rock"){
+
+      return RockType
+
+    }else if(type == "steel"){
+
+      return SteelType
+
+    }else if(type == "water"){
+
+      return WaterType
+
+    }
+
+  }
+
+
+
+  // if(currentFilter != "none"){
+
+  //   console.log(currentFilter)
+
+  //   var filteredPokedexData = pokedexData;
+
+  //   filteredPokedexData = finalPokemonData.filter(function (pokemon) {
+
+  //     if(pokemon.types.length == 1){
+
+  //       console.log("3")
+  //       return pokemon.types[0].toUpperCase() == currentFilter.toUpperCase()
+
+  //     }else if(pokemon.types.length == 2){
+
+  //       console.log("4")
+  //       return (pokemon.types[0].toUpperCase() == currentFilter.toUpperCase() || pokemon.types[1].toUpperCase() == currentFilter.toUpperCase())
+
+  //     }
+
+  //   })
+
+
+  // }
 
   return (
 
@@ -71,15 +206,16 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
         <SelectTeamHeader>
 
-            <TypeFilterModalComponent state={filterState} closeFilterOverlay={() => {setFilterState(false)}}/>
+            <TypeFilterModalComponent state={filterState} closeFilterOverlay={() => {setFilterState(false)}} setFilter = {setCurrentFilter}/>
 
             <RadialTouchable onPress={()=>{Vibration.vibrate(8); setFilterState(true)}} activeOpacity={1}>
 
             <TypeSelectRadial>
 
-                <TypeSelectImage source={DarkType}/>
+              {(currentFilter == "none")?
+              <AntDesign name="filter" size={50} color="black" />:
 
-                {/* <AntDesign name="filter" size={50} color="black" /> */}
+              <TypeSelectImage source={getTypeImage(currentFilter)}/>}
 
             </TypeSelectRadial>
 
@@ -87,8 +223,7 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
             <PokemonSearchBarContainer>
 
-            <PokemonSearchBar
-                onChangeText={text => filterPokedex(text)}/>
+            <PokemonSearchBar onChangeText={text => filterPokedex(text)}/>
 
             <AntDesign name="search1" size={40} color="black" />
             

@@ -57,7 +57,6 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) =>
 
   async function loadEncounterData(){
 
-
     try {
       const response = await fetch(
         encounterURL
