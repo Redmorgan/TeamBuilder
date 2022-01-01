@@ -39,6 +39,8 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
   const[currentFilter, setCurrentFilter] = useState("none")
 
+  const[pokemonTeam, setPokemonTeam] = useState([])
+
   var isLoaded = false
 
   useEffect(()=>{
@@ -173,7 +175,12 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
   }
 
+  function addPokemonToTeam(pokemon){
 
+    pokemonTeam.push(pokemon)
+
+
+  }
 
   // if(currentFilter != "none"){
 

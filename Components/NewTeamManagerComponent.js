@@ -34,9 +34,17 @@ const NewTeamManagerComponent = ({  }) => {
 
       <StatusBar backgroundColor="#ed1e24" style="inverted" />
 
-        <SelectTeamHeader>
+      <SelectTeamHeader>
 
-        </SelectTeamHeader>
+        <TeamHeaderLabel>Current Team</TeamHeaderLabel>
+
+      </SelectTeamHeader>
+
+      <PokemonTeamContainer>
+
+        <TeamMemberContainer></TeamMemberContainer>
+
+      </PokemonTeamContainer>
 
     </MainView>
 
@@ -60,7 +68,35 @@ const SelectTeamHeader = styled.View`
   background-color:#ed1e24
   border-bottom-width: 4px;
   border-bottom-color: #000000
+  display:flex
+  justify-content:center
+  align-items:center
 
 `
 
+const TeamHeaderLabel = styled.Text`
+
+  font-family:PokemonStyle
+  font-size:60px
+
+`
+
+const PokemonTeamContainer = styled.View`
+
+  width:90%
+  height:30%
+  background-color:red
+  margin-top:5%
+  display:flex
+  flex-direction:row
+  flex-wrap:wrap
+
+`
+
+const TeamMemberContainer = styled.View`
+
+  height:50%
+  width:33.33%
+
+`
 export default NewTeamManagerComponent;
