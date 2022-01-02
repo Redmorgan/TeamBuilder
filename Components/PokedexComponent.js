@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Vibration } from "react-native";
+import { Vibration, Alert } from "react-native";
 import styled from "styled-components/native";
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from '@expo/vector-icons';
@@ -28,10 +28,8 @@ import PsychicType from '../images/types/Psychic.png'
 import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
-import pokedexIcon from '../images/pokedexIcon.png'
-import pokeballsIcon from '../images/pokeballsIcon.png'
 
-const PokedexComponent = ({ game, finalPokemonData }) => {
+const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
 
   const[pokedexData, setPokedexData] = useState([])
 
@@ -40,8 +38,6 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
   const[currentFilter, setCurrentFilter] = useState("none")
 
   const[searchString, setSearch] = useState("")
-
-  const[pokemonTeam, setPokemonTeam] = useState([])
 
   useEffect(()=>{
     (async () => {
@@ -183,8 +179,27 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
   function addPokemonToTeam(pokemon){
 
-    pokemonTeam.push(pokemon)
+    if(selectedTeam.length < 6){
 
+      selectedTeam.push(pokemon)
+
+    }else{
+
+      Alert.alert(
+        "Team Error",
+        "You already have 6 pokemon on your team.",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+        ],
+        {
+          cancelable: true,
+        }
+      )
+
+    }
 
   }
 

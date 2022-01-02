@@ -166,9 +166,18 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
   }
 
   function openLocations(){
-
+    
     onPressButton()
     setPokemonTab(false)
+
+  }
+
+  function addPokemonToTeam(){
+
+    onPressButton()
+    var pokemonData = {name:name, types:types, spriteURL:spriteURL}
+    addToTeam(pokemonData)
+
 
   }
 
@@ -274,7 +283,7 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
 
             </PokemonTypesContainer>
 
-            <AddPokemonTouchable onPress={() => {onPressButton()}} underlayColor={'transparent'} activeOpacity={1}>
+            <AddPokemonTouchable onPress={() => {addPokemonToTeam()}} underlayColor={'transparent'} activeOpacity={1}>
 
               <AddPokemonIcon source={AddIcon}/>
 

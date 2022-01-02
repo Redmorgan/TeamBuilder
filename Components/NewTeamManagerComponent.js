@@ -26,7 +26,9 @@ import WaterType from '../images/types/Water.png'
 import pokedexIcon from '../images/pokedexIcon.png'
 import pokeballsIcon from '../images/pokeballsIcon.png'
 
-const NewTeamManagerComponent = ({  }) => {
+const NewTeamManagerComponent = ({ selectedTeam }) => {
+
+  console.log(selectedTeam)
 
   return (
 
@@ -42,7 +44,59 @@ const NewTeamManagerComponent = ({  }) => {
 
       <PokemonTeamContainer>
 
-        <TeamMemberContainer></TeamMemberContainer>
+        {(selectedTeam.length >= 1 )?
+        <TeamMemberContainer>
+
+          <PokemonSprite resizeMode="contain" source={{uri:selectedTeam[0].spriteURL}}/>
+
+          <PokemonName>{selectedTeam[0].name}</PokemonName>
+
+        </TeamMemberContainer>:null}
+
+        {(selectedTeam.length >= 2)?
+        <TeamMemberContainer>
+
+          <PokemonSprite resizeMode="contain" source={{uri:selectedTeam[1].spriteURL}}/>
+
+          <PokemonName>{selectedTeam[1].name}</PokemonName>
+
+        </TeamMemberContainer>:null}
+
+        {(selectedTeam.length >= 3)?
+        <TeamMemberContainer>
+
+          <PokemonSprite resizeMode="contain" source={{uri:selectedTeam[2].spriteURL}}/>
+
+          <PokemonName>{selectedTeam[2].name}</PokemonName>
+
+        </TeamMemberContainer>:null}
+
+        {(selectedTeam.length >= 4)?
+        <TeamMemberContainer>
+
+          <PokemonSprite resizeMode="contain" source={{uri:selectedTeam[3].spriteURL}}/>
+
+          <PokemonName>{selectedTeam[3].name}</PokemonName>
+
+        </TeamMemberContainer>:null}
+
+        {(selectedTeam.length >= 5)?
+        <TeamMemberContainer>
+
+          <PokemonSprite resizeMode="contain" source={{uri:selectedTeam[4].spriteURL}}/>
+
+          <PokemonName>{selectedTeam[4].name}</PokemonName>
+
+        </TeamMemberContainer>:null}
+
+        {(selectedTeam.length >= 6)?
+        <TeamMemberContainer>
+
+          <PokemonSprite resizeMode="contain" source={{uri:selectedTeam[5].spriteURL}}/>
+
+          <PokemonName>{selectedTeam[5].name}</PokemonName>
+
+        </TeamMemberContainer>:null}
 
       </PokemonTeamContainer>
 
@@ -85,7 +139,6 @@ const PokemonTeamContainer = styled.View`
 
   width:90%
   height:30%
-  background-color:red
   margin-top:5%
   display:flex
   flex-direction:row
@@ -97,6 +150,21 @@ const TeamMemberContainer = styled.View`
 
   height:50%
   width:33.33%
+  align-items:center
+
+`
+
+const PokemonSprite = styled.Image`
+
+  height:90%
+  width:90%
+
+`
+
+const PokemonName = styled.Text`
+
+  font-family:PokemonStyle
+  font-size:25px
 
 `
 export default NewTeamManagerComponent;

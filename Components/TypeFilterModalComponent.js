@@ -83,109 +83,109 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
                     <TypeButton onPress={() => {selectTypeFilter("bug")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={BugType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="bug"?3:0}} source={BugType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("dark")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={DarkType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="dark"?3:0}} source={DarkType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("dragon")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={DragonType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="dragon"?3:0}} source={DragonType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("electric")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={ElectricType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="electric"?3:0}} source={ElectricType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("fairy")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={FairyType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="fairy"?3:0}} source={FairyType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("fighting")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={FightingType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="fighting"?3:0}} source={FightingType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("fire")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={FireType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="fire"?3:0}} source={FireType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("flying")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={FlyingType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="flying"?3:0}} source={FlyingType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("ghost")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={GhostType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="ghost"?3:0}} source={GhostType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("grass")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={GrassType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="grass"?3:0}} source={GrassType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("ground")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={GroundType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="ground"?3:0}} source={GroundType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("ice")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={IceType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="ice"?3:0}} source={IceType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("normal")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={NormalType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="normal"?3:0}} source={NormalType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("poison")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={PoisonType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="poison"?3:0}} source={PoisonType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("psychic")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={PsychicType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="psychic"?3:0}} source={PsychicType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("rock")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={RockType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="rock"?3:0}} source={RockType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("steel")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={SteelType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="steel"?3:0}} source={SteelType}/>
 
                     </TypeButton>
 
                     <TypeButton onPress={() => {selectTypeFilter("water")}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <TypeImage source={WaterType}/>
+                        <TypeImage style={{borderRadius:90, borderColor:"#000000", borderWidth:selectedType=="water"?3:0}} source={WaterType}/>
 
                     </TypeButton>
 

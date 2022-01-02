@@ -2,34 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { StatusBar } from 'expo-status-bar';
-import { AntDesign } from '@expo/vector-icons';
 import { Audio } from 'expo-av'
 
 // components
-import SelectPokemonComponent from "../Components/SelectPokemonComponent";
-import LoadingComponent from "../Components/LoadingComponent";
 import PokedexComponent from "../Components/PokedexComponent";
 import NewTeamManagerComponent from "../Components/NewTeamManagerComponent";
 
 // images
-import BugType from '../images/types/Bug.png'
-import DarkType from '../images/types/Dark.png'
-import DragonType from '../images/types/Dragon.png'
-import ElectricType from '../images/types/Electric.png'
-import FairyType from '../images/types/Fighting.png'
-import FightingType from '../images/types/Fighting.png'
-import FireType from '../images/types/Fire.png'
-import FlyingType from '../images/types/Flying.png'
-import GhostType from '../images/types/Ghost.png'
-import GrassType from '../images/types/Grass.png'
-import GroundType from '../images/types/Ground.png'
-import IceType from '../images/types/Ice.png'
-import NormalType from '../images/types/Normal.png'
-import PoisonType from '../images/types/Poison.png'
-import PsychicType from '../images/types/Psychic.png'
-import RockType from '../images/types/Rock.png'
-import SteelType from '../images/types/Steel.png'
-import WaterType from '../images/types/Water.png'
 import pokedexIcon from '../images/pokedexIcon.png'
 import pokeballsIcon from '../images/pokeballsIcon.png'
 
@@ -38,6 +17,8 @@ const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
   const [currentTab, setCurrentTab] = useState(true)
 
   const [finalPokemonData, setPokemonData] = useState()
+
+  const[pokemonTeam, setPokemonTeam] = useState([])
 
   async function getPokedexData(){
 
@@ -228,8 +209,8 @@ const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
       <StatusBar backgroundColor="#ed1e24" style="inverted" />
 
       {(currentTab)?
-        <PokedexComponent regionData = {route.params.region} game = {route.params.game} finalPokemonData={finalPokemonData}/>:
-        <NewTeamManagerComponent/>}
+        <PokedexComponent regionData = {route.params.region} game = {route.params.game} finalPokemonData={finalPokemonData} selectedTeam={pokemonTeam}/>:
+        <NewTeamManagerComponent selectedTeam={pokemonTeam}/>}
 
       <SelectTeamTabControls>
 
