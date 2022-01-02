@@ -24,7 +24,7 @@ import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
 import AddIcon from '../images/addIcon.png'
 
-const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game}) => {
+const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, addToTeam}) => {
 
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(

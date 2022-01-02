@@ -39,18 +39,16 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
   const[currentFilter, setCurrentFilter] = useState("none")
 
-  const[pokemonTeam, setPokemonTeam] = useState([])
+  const[searchString, setSearch] = useState("")
 
-  var isLoaded = false
+  const[pokemonTeam, setPokemonTeam] = useState([])
 
   useEffect(()=>{
     (async () => {
 
-      if(finalPokemonData != null && isLoaded == false){
+      if(finalPokemonData != null){
 
         setPokedexData(finalPokemonData)
-
-        isLoaded = true
 
       }
 
@@ -58,13 +56,14 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
   },[finalPokemonData])
 
 
-  
-  function filterPokedex(searchString) {
+  function filterPokedex(searchString, typeFilter) {
 
     if(finalPokemonData != null){  
+      console.log()
+      setSearch(searchString)
 
       var filteredPokedexData;
-      if(currentFilter == "none"){
+      if(typeFilter == "none"){
 
         filteredPokedexData = finalPokemonData.filter(function (pokemon) {
           
@@ -78,16 +77,15 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
           
           if(pokemon.types.length == 1){
 
-            return pokemon.name.includes(searchString) && pokemon.types[0].toUpperCase() == currentFilter.toUpperCase()
+            return pokemon.name.includes(searchString) && pokemon.types[0].toUpperCase() == typeFilter.toUpperCase()
     
           }else if(pokemon.types.length == 2){
     
-            return pokemon.name.includes(searchString) && (pokemon.types[0].toUpperCase() == currentFilter.toUpperCase() || pokemon.types[1].toUpperCase() == currentFilter.toUpperCase())
+            return pokemon.name.includes(searchString) && (pokemon.types[0].toUpperCase() == typeFilter.toUpperCase() || pokemon.types[1].toUpperCase() == typeFilter.toUpperCase())
     
           }
 
         })
-
 
       } 
 
@@ -175,6 +173,14 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
   }
 
+
+  function applyFilter(type){
+
+    setCurrentFilter(type)
+    filterPokedex(searchString, type)
+
+  }
+
   function addPokemonToTeam(pokemon){
 
     pokemonTeam.push(pokemon)
@@ -182,38 +188,13 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
   }
 
-  // if(currentFilter != "none"){
-
-  //   console.log(currentFilter)
-
-  //   var filteredPokedexData = pokedexData;
-
-  //   filteredPokedexData = finalPokemonData.filter(function (pokemon) {
-
-  //     if(pokemon.types.length == 1){
-
-  //       console.log("3")
-  //       return pokemon.types[0].toUpperCase() == currentFilter.toUpperCase()
-
-  //     }else if(pokemon.types.length == 2){
-
-  //       console.log("4")
-  //       return (pokemon.types[0].toUpperCase() == currentFilter.toUpperCase() || pokemon.types[1].toUpperCase() == currentFilter.toUpperCase())
-
-  //     }
-
-  //   })
-
-
-  // }
-
   return (
 
     <MainView>
 
         <SelectTeamHeader>
 
-            <TypeFilterModalComponent state={filterState} closeFilterOverlay={() => {setFilterState(false)}} setFilter = {setCurrentFilter}/>
+            <TypeFilterModalComponent state={filterState} closeFilterOverlay={() => {setFilterState(false)}} setFilter = {applyFilter}/>
 
             <RadialTouchable onPress={()=>{Vibration.vibrate(8); setFilterState(true)}} activeOpacity={1}>
 
@@ -230,7 +211,7 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
 
             <PokemonSearchBarContainer>
 
-            <PokemonSearchBar onChangeText={text => filterPokedex(text)}/>
+            <PokemonSearchBar onChangeText={text => filterPokedex(text, currentFilter)}/>
 
             <AntDesign name="search1" size={40} color="black" />
             
@@ -248,7 +229,7 @@ const PokedexComponent = ({ game, finalPokemonData }) => {
             data = {pokedexData}
             keyExtractor={(item) => item.name}
             nestedScrollEnabled
-            renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']} spriteURL={item['sprite']} encounterURL={item['encounterURL']} game={game}/>)}
+            renderItem={({ item }) => (<SelectPokemonComponent name={item['name']} types={item['types']} spriteURL={item['sprite']} encounterURL={item['encounterURL']} game={game} addToTeam={addPokemonToTeam}/>)}
             contentContainerStyle={{paddingBottom:10}}/>
           
         </PokemonFlatListContainer>}
