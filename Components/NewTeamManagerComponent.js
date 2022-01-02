@@ -99,6 +99,26 @@ const NewTeamManagerComponent = ({ selectedTeam }) => {
         </TeamMemberContainer>:null}
 
       </PokemonTeamContainer>
+        
+      {(selectedTeam.length >= 1)?
+      <TypeEffectivenessContainer>
+
+        <TypeEffectiveTitle>Weak Against:</TypeEffectiveTitle>
+
+        <TypeEffectivenessList>
+
+          
+
+        </TypeEffectivenessList>
+
+      </TypeEffectivenessContainer>:null}
+
+      {(selectedTeam.length >= 1)?
+      <SaveTeamButton>
+
+        <ButtonLabel>Save Team</ButtonLabel>
+
+      </SaveTeamButton>:null}
 
     </MainView>
 
@@ -165,6 +185,48 @@ const PokemonName = styled.Text`
 
   font-family:PokemonStyle
   font-size:25px
+
+`
+
+const TypeEffectivenessContainer = styled.View`
+
+  width:90%
+  height:30%
+  margin-top:10%
+
+`
+
+const TypeEffectiveTitle = styled.Text`
+
+  font-family:PokemonStyle
+  font-size:35px
+
+`
+
+const TypeEffectivenessList = styled.View`
+
+  width:100%
+
+`
+
+const SaveTeamButton = styled.View`
+
+  width:60%
+  height:10%
+  margin-top:2.7%
+  background-color:#ed1e24
+  border-radius:25px
+  border:3px solid #000000
+  display:flex
+  align-items:center
+  justify-content:center
+
+`
+
+const ButtonLabel = styled.Text`
+
+  font-family:PokemonStyle
+  font-size:50px
 
 `
 export default NewTeamManagerComponent;
