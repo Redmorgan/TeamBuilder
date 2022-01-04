@@ -210,7 +210,7 @@ const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
 
       {(currentTab)?
         <PokedexComponent regionData = {route.params.region} game = {route.params.game} finalPokemonData={finalPokemonData} selectedTeam={pokemonTeam}/>:
-        <NewTeamManagerComponent selectedTeam={pokemonTeam}/>}
+        <NewTeamManagerComponent selectedTeam={pokemonTeam} setTeam={setPokemonTeam}/>}
 
       <SelectTeamTabControls>
 
