@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { StatusBar } from 'expo-status-bar';
-import { AntDesign } from '@expo/vector-icons';
 
 // images
 import BugType from '../images/types/Bug.png'
@@ -23,13 +22,14 @@ import PsychicType from '../images/types/Psychic.png'
 import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
-import pokedexIcon from '../images/pokedexIcon.png'
-import pokeballsIcon from '../images/pokeballsIcon.png'
+import DeleteIcon from '../images/deleteIcon.png'
 
 //JSON
 import TypeEffects from '../typeEffects.json'
 
 const NewTeamManagerComponent = ({ selectedTeam }) => {
+
+  const[weaknesses, setWeaknesses] = useState([])
 
   useEffect(()=>{
     (async () => {
@@ -39,12 +39,11 @@ const NewTeamManagerComponent = ({ selectedTeam }) => {
     })()
   },[selectedTeam])
 
-  var calculatedWeaknesses = []
-
   function calculateWeakness(){
 
     var Strengths = []
     var Weaknesses = []
+    var calculatedWeaknesses = []
 
     for(var i = 0; i <= selectedTeam.length-1; i++){
 
@@ -130,7 +129,85 @@ const NewTeamManagerComponent = ({ selectedTeam }) => {
 
     }
 
-    
+    setWeaknesses(calculatedWeaknesses)
+
+  }
+
+  function getTypeImage(type){
+
+    if(type == "Bug"){
+
+      return BugType
+
+    }else if(type == "Dark"){
+
+      return DarkType
+
+    }else if(type == "Dragon"){
+
+      return DragonType
+
+    }else if(type == "Electric"){
+
+      return ElectricType
+
+    }else if(type == "Fairy"){
+
+      return FairyType
+
+    }else if(type == "Fighting"){
+
+      return FightingType
+
+    }else if(type == "Fire"){
+
+      return FireType
+
+    }else if(type == "Flying"){
+
+      return FlyingType
+
+    }else if(type == "Ghost"){
+
+      return GhostType
+
+    }else if(type == "Grass"){
+
+      return GrassType
+
+    }else if(type == "Ground"){
+
+      return GroundType
+
+    }else if(type == "Ice"){
+
+      return IceType
+
+    }else if(type == "Normal"){
+
+      return NormalType
+
+    }else if(type == "Poison"){
+
+      return PoisonType
+
+    }else if(type == "Psychic"){
+
+      return PsychicType
+
+    }else if(type == "Rock"){
+
+      return RockType
+
+    }else if(type == "Steel"){
+
+      return SteelType
+
+    }else if(type == "Water"){
+
+      return WaterType
+
+    }
 
   }
 
@@ -219,7 +296,10 @@ const NewTeamManagerComponent = ({ selectedTeam }) => {
         <TypeEffectivenessList>
 
           <WeaknessFlatList
-            data={calculatedWeaknesses}
+            data={weaknesses}
+            keyExtractor={(item) => item}
+            numColumns={5}
+            renderItem={({ item }) => (<TypeImage source={getTypeImage(item)}/>)}
             />
 
         </TypeEffectivenessList>
@@ -329,7 +409,15 @@ const WeaknessFlatList = styled.FlatList`
   width:100%
   flex-direction:row
   flex-wrap:wrap
-  background-color:red
+
+`
+
+const TypeImage = styled.Image`
+
+  width:60px
+  height:60px
+  margin-right:10px
+  margin-bottom:10px
 
 `
 
@@ -354,5 +442,15 @@ const ButtonLabel = styled.Text`
 
 `
 
-const
+const RemovePokemonTouchable = styled.TouchableHighlight`
+
+`
+
+const RemovePokemonImage = styled.Image`
+
+  width:100%
+  height:100%
+
+`
+
 export default NewTeamManagerComponent;
