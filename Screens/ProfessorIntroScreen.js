@@ -24,7 +24,7 @@ const ProfessorIntroScreen = ( { navigation }) => {
           global.backgroundMusic = sound
           
           try {
-            //await sound.playAsync()
+            await sound.playAsync()
           } catch (e) {
             console.log(e)
           }

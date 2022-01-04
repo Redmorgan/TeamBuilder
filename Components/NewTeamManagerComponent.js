@@ -26,9 +26,120 @@ import WaterType from '../images/types/Water.png'
 import pokedexIcon from '../images/pokedexIcon.png'
 import pokeballsIcon from '../images/pokeballsIcon.png'
 
+//JSON
+import TypeEffects from '../typeEffects.json'
+
 const NewTeamManagerComponent = ({ selectedTeam }) => {
 
-  console.log(selectedTeam)
+  useEffect(()=>{
+    (async () => {
+
+      calculateWeakness()
+
+    })()
+  },[selectedTeam])
+
+  var calculatedWeaknesses = []
+
+  function calculateWeakness(){
+
+    var Strengths = []
+    var Weaknesses = []
+
+    for(var i = 0; i <= selectedTeam.length-1; i++){
+
+      var pokemon = selectedTeam[i]
+
+      for(var j = 0; j <= pokemon.types.length-1; j++){
+
+        for(var k = 0; k <= TypeEffects.length-1; k++){
+
+          if(pokemon.types[j] == TypeEffects[k].name){
+
+            for(var l = 0; l <= TypeEffects[k].strengths.length-1; l++){
+              
+              var duplicate = false;
+
+              for(var m = 0; m <= Strengths.length-1; m++){
+
+                if(Strengths[m] == TypeEffects[k].strengths[l]){
+
+                  duplicate = true
+
+                }
+
+              }
+
+              if(duplicate == false){
+
+                Strengths.push(TypeEffects[k].strengths[l])
+
+              }
+
+            }
+
+            for(var l = 0; l <= TypeEffects[k].weaknesses.length-1; l++){
+
+              var duplicate = false
+
+              for(var m = 0; m <= Weaknesses.length-1; m++){
+
+                if(Weaknesses[m] == TypeEffects[k].weaknesses[l]){
+
+                  duplicate = true
+
+                }
+
+              }
+
+              if(duplicate == false){
+
+                Weaknesses.push(TypeEffects[k].weaknesses[l])
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+    for(var i = 0; i <= Weaknesses.length-1; i++){
+
+      var duplicate = false
+
+      for(var j = 0; j <= Strengths.length-1; j++){
+
+        if(Strengths[j] == Weaknesses[i]){
+
+          duplicate = true
+
+        }
+
+      }
+
+      if(duplicate == false){
+
+        calculatedWeaknesses.push(Weaknesses[i])
+
+      }
+
+    }
+
+    
+
+  }
+
+  function removeFromTeam(){
+
+
+
+  }
+
 
   return (
 
@@ -107,7 +218,9 @@ const NewTeamManagerComponent = ({ selectedTeam }) => {
 
         <TypeEffectivenessList>
 
-          
+          <WeaknessFlatList
+            data={calculatedWeaknesses}
+            />
 
         </TypeEffectivenessList>
 
@@ -206,6 +319,17 @@ const TypeEffectiveTitle = styled.Text`
 const TypeEffectivenessList = styled.View`
 
   width:100%
+  height:65%
+  margin-top:10px
+
+`
+
+const WeaknessFlatList = styled.FlatList`
+
+  width:100%
+  flex-direction:row
+  flex-wrap:wrap
+  background-color:red
 
 `
 
@@ -229,4 +353,6 @@ const ButtonLabel = styled.Text`
   font-size:50px
 
 `
+
+const
 export default NewTeamManagerComponent;

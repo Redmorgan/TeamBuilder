@@ -55,7 +55,7 @@ const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
   function filterPokedex(searchString, typeFilter) {
 
     if(finalPokemonData != null){  
-      console.log()
+      
       setSearch(searchString)
 
       var filteredPokedexData;
