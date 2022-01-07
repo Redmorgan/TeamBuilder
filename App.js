@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 // Components
 import StartScreen from '../TeamBuilder/Screens/StartScreen.js'
@@ -9,7 +10,7 @@ import ProfessorIntroScreen from '../TeamBuilder/Screens/ProfessorIntroScreen.js
 import SelectGameScreen from '../TeamBuilder/Screens/SelectGameScreen.js'
 import ProfessorOutroScreen from '../TeamBuilder/Screens/ProfessorOutroScreen.js'
 import SelectTeamScreen from '../TeamBuilder/Screens/SelectTeamScreen.js'
-import AppLoading from 'expo-app-loading';
+import TeamsViewerScreen from './Screens/TeamsViewerScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,7 +41,7 @@ export default function App() {
 
     <NavigationContainer>
 
-      <AppLoading />
+      <AppLoading/>
 
       <Stack.Navigator initialRouteName="Start" screenOptions={{ headerShown:false }}>
 
@@ -53,6 +54,8 @@ export default function App() {
         <Stack.Screen name="ProfessorOutro" component={ProfessorOutroScreen}/>
 
         <Stack.Screen name="SelectTeam" component={SelectTeamScreen} />
+
+        <Stack.Screen name="ViewTeams" component={TeamsViewerScreen} />
 
       </Stack.Navigator>
       

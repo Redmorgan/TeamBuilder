@@ -12,7 +12,7 @@ import NewTeamManagerComponent from "../Components/NewTeamManagerComponent";
 import pokedexIcon from '../images/pokedexIcon.png'
 import pokeballsIcon from '../images/pokeballsIcon.png'
 
-const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
+const SelectTeamScreen = ({ navigation, route }) => {
 
   const [currentTab, setCurrentTab] = useState(true)
 
@@ -210,7 +210,7 @@ const SelectTeamScreen = ({ navigation: { navigate }, route, game }) => {
 
       {(currentTab)?
         <PokedexComponent regionData = {route.params.region} game = {route.params.game} finalPokemonData={finalPokemonData} selectedTeam={pokemonTeam}/>:
-        <NewTeamManagerComponent selectedTeam={pokemonTeam} setTeam={setPokemonTeam}/>}
+        <NewTeamManagerComponent selectedTeam={pokemonTeam} setTeam={setPokemonTeam} navigation={navigation} game = {route.params.game}/>}
 
       <SelectTeamTabControls>
 

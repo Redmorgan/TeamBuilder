@@ -3,6 +3,7 @@ import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { StatusBar } from 'expo-status-bar';
 import { Audio } from 'expo-av'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // images
 import BugType from '../images/types/Bug.png'
@@ -28,7 +29,7 @@ import DeleteIcon from '../images/deleteIcon.png'
 //JSON
 import TypeEffects from '../typeEffects.json'
 
-const NewTeamManagerComponent = ({ selectedTeam, setTeam }) => {
+const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) => {
 
   
 
@@ -230,8 +231,6 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam }) => {
 
     var updatedTeam = []
 
-    console.log(currentTeam)
-
     for(var teamIndex = 0; teamIndex <= currentTeam.length-1; teamIndex++){
 
       var pokemon = currentTeam[teamIndex]
@@ -249,6 +248,39 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam }) => {
 
   }
 
+  function onPressSave(){
+
+    onPressButton()
+
+    saveTeam()
+
+    navigation.reset({
+      index:0,
+      routes: [{ name: 'Start' }]
+    })
+
+  }
+
+  const saveTeam = async () => {
+
+    try {
+
+      var teamID = Date.now()
+
+      teamID = teamID.toString()
+
+      const teamData = {game:game, team:selectedTeam}
+
+      await AsyncStorage.setItem(teamID, JSON.stringify(teamData))
+      console.log("Team Saved")
+
+    } catch (e) {
+
+      console.log("Error whilst saving pokemon team.")
+
+    }
+
+  }
 
   return (
 
@@ -375,7 +407,7 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam }) => {
       </TypeEffectivenessContainer>:null}
 
       {(currentTeam.length >= 1)?
-      <SaveTeamButton>
+      <SaveTeamButton onPress={()=>{onPressSave()}} underlayColor={'#ed1e24'} activeOpacity={1}>
 
         <ButtonLabel>Save Team</ButtonLabel>
 
@@ -489,7 +521,7 @@ const TypeImage = styled.Image`
 
 `
 
-const SaveTeamButton = styled.View`
+const SaveTeamButton = styled.TouchableHighlight`
 
   width:60%
   height:10%

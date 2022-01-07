@@ -27,6 +27,7 @@ const StartScreen = ({ navigation }) => {
   function openMyTeams(){
 
     onPressButton()
+    navigation.push('ViewTeams')
 
   }
 
