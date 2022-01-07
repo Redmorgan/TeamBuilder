@@ -3,6 +3,7 @@ import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { StatusBar } from 'expo-status-bar';
 import { Audio } from 'expo-av'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Images
 import BackArrow from '../images/BackArrow.png'
@@ -14,19 +15,60 @@ import SavedTeamComponent from "../Components/SavedTeamComponent";
 
 const TeamsViewerScreen = ({ navigation }) => {
 
+    const[teamsData, setTeamsData] = useState([])
+    const[isLoaded, setLoading] = useState(false)
+
     async function onPressButton(){
         const { sound } = await Audio.Sound.createAsync(
           require('../audio/pressSound.mp3')
         );
         await sound.playAsync()
         Vibration.vibrate(5)
-      }
+    }
 
     function gotoHome(){
 
         onPressButton()
 
         navigation.push('Start')
+
+    }
+
+    const fetchAllItems = async () => {
+        try {
+            const keys = await AsyncStorage.getAllKeys()
+            const items = await AsyncStorage.multiGet(keys)
+
+            setTeamsData(items)
+        } catch (error) {
+            console.log(error, "problemo")
+        }
+    }
+
+    async function deleteTeam(key){
+
+        try {
+            await AsyncStorage.removeItem(key);
+            fetchAllItems()
+        }
+        catch(exception) {
+            console.log("Error deleting team: " + exception);
+        }
+
+    }
+
+    // TESTING FUNCTION - REMOVE ON COMPLETION
+    const clearAsyncStorage = async() => {
+        AsyncStorage.clear();
+    }
+
+    //clearAsyncStorage()
+
+    if(isLoaded == false){
+
+        fetchAllItems()
+
+        setLoading(true)
 
     }
 
@@ -48,9 +90,11 @@ const TeamsViewerScreen = ({ navigation }) => {
 
         </ViewTeamsHeader>
 
-        <SavedTeamComponent></SavedTeamComponent>
-
-        {/* <TeamsFlatlist/> */}
+        <TeamsFlatlist
+            data={teamsData}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (<SavedTeamComponent teamData={item} deleteTeam={deleteTeam}/>)}
+            contentContainerStyle={{paddingBottom:10}}/>
 
     </MainView>
 

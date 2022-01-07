@@ -37,6 +37,7 @@ const TeamMemberContainer = styled.View`
   height:50%
   width:33.33%
   align-items:center
+  margin-bottom:5px
 
 `
 

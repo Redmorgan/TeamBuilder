@@ -7,11 +7,11 @@ import { Audio } from 'expo-av'
 // Components
 import SelectGameComponent from "../Components/SelectGameComponent";
 
-//images
+// Images
 import SelectBackground from '../images/SelectBackground.png'
 import SelectGameContainer from '../images/SelectGameContainer.png'
 
-//logos
+// Logos
 import Red from '../images/logos/Red.png'
 import Blue from '../images/logos/Blue.png'
 import Yellow from '../images/logos/Yellow.png'
