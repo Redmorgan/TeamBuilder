@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Audio } from 'expo-av'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// images
+// Images
 import BugType from '../images/types/Bug.png'
 import DarkType from '../images/types/Dark.png'
 import DragonType from '../images/types/Dragon.png'
@@ -26,8 +26,11 @@ import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
 import DeleteIcon from '../images/deleteIcon.png'
 
-//JSON
+// JSON
 import TypeEffects from '../typeEffects.json'
+
+// Components
+import TeamMemberComponent from "./TeamMemberComponent";
 
 const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) => {
 
@@ -296,95 +299,17 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
 
       <PokemonTeamContainer>
 
-        {(currentTeam.length >= 1 )?
-        <TeamMemberContainer>
+        {(currentTeam.length >= 1)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[0]} readOnly={false}/>:null}
 
-          <RemovePokemonTouchable onPress={() => {removeFromTeam(currentTeam[0].name)}} underlayColor={'transparent'} activeOpacity={1}>
+        {(currentTeam.length >= 2)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[1]} readOnly={false}/>:null}
 
-            <RemovePokemonImage source={DeleteIcon}/>
+        {(currentTeam.length >= 3)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[2]} readOnly={false}/>:null}
 
-          </RemovePokemonTouchable>
+        {(currentTeam.length >= 4)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[3]} readOnly={false}/>:null}
 
-          <PokemonSprite resizeMode="contain" source={{uri:currentTeam[0].spriteURL}}/>
+        {(currentTeam.length >= 5)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[4]} readOnly={false}/>:null}
 
-          <PokemonName>{currentTeam[0].name}</PokemonName>
-
-        </TeamMemberContainer>:null}
-
-        {(currentTeam.length >= 2)?
-        <TeamMemberContainer>
-
-          <RemovePokemonTouchable onPress={() => {removeFromTeam(currentTeam[1].name)}} underlayColor={'transparent'} activeOpacity={1}>
-
-            <RemovePokemonImage source={DeleteIcon}/>
-
-          </RemovePokemonTouchable>
-
-          <PokemonSprite resizeMode="contain" source={{uri:currentTeam[1].spriteURL}}/>
-
-          <PokemonName>{currentTeam[1].name}</PokemonName>
-
-        </TeamMemberContainer>:null}
-
-        {(currentTeam.length >= 3)?
-        <TeamMemberContainer>
-
-          <RemovePokemonTouchable onPress={() => {removeFromTeam(currentTeam[2].name)}} underlayColor={'transparent'} activeOpacity={1}>
-
-            <RemovePokemonImage source={DeleteIcon}/>
-
-          </RemovePokemonTouchable>
-
-          <PokemonSprite resizeMode="contain" source={{uri:currentTeam[2].spriteURL}}/>
-
-          <PokemonName>{currentTeam[2].name}</PokemonName>
-
-        </TeamMemberContainer>:null}
-
-        {(currentTeam.length >= 4)?
-        <TeamMemberContainer>
-
-          <RemovePokemonTouchable onPress={() => {removeFromTeam(currentTeam[3].name)}} underlayColor={'transparent'} activeOpacity={1}>
-
-            <RemovePokemonImage source={DeleteIcon}/>
-
-          </RemovePokemonTouchable>
-
-          <PokemonSprite resizeMode="contain" source={{uri:currentTeam[3].spriteURL}}/>
-
-          <PokemonName>{currentTeam[3].name}</PokemonName>
-
-        </TeamMemberContainer>:null}
-
-        {(currentTeam.length >= 5)?
-        <TeamMemberContainer>
-
-          <RemovePokemonTouchable onPress={() => {removeFromTeam(currentTeam[4].name)}} underlayColor={'transparent'} activeOpacity={1}>
-
-            <RemovePokemonImage source={DeleteIcon}/>
-
-          </RemovePokemonTouchable>
-
-          <PokemonSprite resizeMode="contain" source={{uri:currentTeam[4].spriteURL}}/>
-
-          <PokemonName>{currentTeam[4].name}</PokemonName>
-
-        </TeamMemberContainer>:null}
-
-        {(currentTeam.length >= 6)?
-        <TeamMemberContainer>
-
-          <RemovePokemonTouchable onPress={() => {removeFromTeam(currentTeam[5].name)}} underlayColor={'transparent'} activeOpacity={1}>
-
-            <RemovePokemonImage source={DeleteIcon}/>
-
-          </RemovePokemonTouchable>
-
-          <PokemonSprite resizeMode="contain" source={{uri:currentTeam[5].spriteURL}}/>
-
-          <PokemonName>{currentTeam[5].name}</PokemonName>
-
-        </TeamMemberContainer>:null}
+        {(currentTeam.length >= 6)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[5]} readOnly={false}/>:null}
 
       </PokemonTeamContainer>
         
@@ -459,28 +384,6 @@ const PokemonTeamContainer = styled.View`
 
 `
 
-const TeamMemberContainer = styled.View`
-
-  height:50%
-  width:33.33%
-  align-items:center
-
-`
-
-const PokemonSprite = styled.Image`
-
-  height:90%
-  width:90%
-
-`
-
-const PokemonName = styled.Text`
-
-  font-family:PokemonStyle
-  font-size:25px
-
-`
-
 const TypeEffectivenessContainer = styled.View`
 
   width:90%
@@ -539,24 +442,6 @@ const ButtonLabel = styled.Text`
 
   font-family:PokemonStyle
   font-size:50px
-
-`
-
-const RemovePokemonTouchable = styled.TouchableHighlight`
-
-  width:20px
-  height:20px
-  position:absolute
-  right:0
-  z-index:10
-  top:10%
-
-`
-
-const RemovePokemonImage = styled.Image`
-
-  width:100%
-  height:100%
 
 `
 

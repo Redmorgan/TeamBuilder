@@ -7,6 +7,10 @@ import { Audio } from 'expo-av'
 // Images
 import BackArrow from '../images/BackArrow.png'
 
+// Components
+import SavedTeamComponent from "../Components/SavedTeamComponent";
+
+
 
 const TeamsViewerScreen = ({ navigation }) => {
 
@@ -34,15 +38,19 @@ const TeamsViewerScreen = ({ navigation }) => {
 
         <ViewTeamsHeader>
 
-        <BackArrowButton onPress={() => {gotoHome()}} underlayColor={'transparent'} activeOpacity={1}>
+            <BackArrowButton onPress={() => {gotoHome()}} underlayColor={'transparent'} activeOpacity={1}>
 
-            <BackArrowImage source={BackArrow}/>
+                <BackArrowImage source={BackArrow}/>
 
-        </BackArrowButton>
+            </BackArrowButton>
 
-        <HeaderLabel>My Teams</HeaderLabel>
+            <HeaderLabel>My Teams</HeaderLabel>
 
         </ViewTeamsHeader>
+
+        <SavedTeamComponent></SavedTeamComponent>
+
+        {/* <TeamsFlatlist/> */}
 
     </MainView>
 
@@ -94,6 +102,14 @@ const BackArrowImage = styled.Image`
 
     width:100%;
     height:100%;
+
+`
+
+const TeamsFlatlist = styled.FlatList`
+
+    width:100%
+    background-color:#F5F5F5
+    padding-top:10px
 
 `
 
