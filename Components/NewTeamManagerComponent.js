@@ -228,23 +228,36 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
 
   }
 
-  function removeFromTeam(name){
+  function removeFromTeam(teamIndex){
 
     onPressButton()
 
     var updatedTeam = []
 
-    for(var teamIndex = 0; teamIndex <= currentTeam.length-1; teamIndex++){
+    for(var i = 0; i <= currentTeam.length-1; i++){
 
-      var pokemon = currentTeam[teamIndex]
+      var pokemon = currentTeam[i]
 
-      if(pokemon['name'] != name){
+      if(i != teamIndex){
 
-        updatedTeam.push(currentTeam[teamIndex])
+        updatedTeam.push(pokemon)
 
       }
 
     }
+
+
+    // for(var teamIndex = 0; teamIndex <= currentTeam.length-1; teamIndex++){
+
+    //   var pokemon = currentTeam[teamIndex]
+
+    //   if(pokemon['name'] != name){
+
+    //     updatedTeam.push(currentTeam[teamIndex])
+
+    //   }
+
+    // }
 
     setTeam(updatedTeam)
     setCurrentTeam(updatedTeam)
@@ -299,17 +312,17 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
 
       <PokemonTeamContainer>
 
-        {(currentTeam.length >= 1)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[0]} readOnly={false}/>:null}
+        {(currentTeam.length >= 1)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[0]} index={0} readOnly={false}/>:null}
 
-        {(currentTeam.length >= 2)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[1]} readOnly={false}/>:null}
+        {(currentTeam.length >= 2)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[1]} index={1} readOnly={false}/>:null}
 
-        {(currentTeam.length >= 3)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[2]} readOnly={false}/>:null}
+        {(currentTeam.length >= 3)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[2]} index={2} readOnly={false}/>:null}
 
-        {(currentTeam.length >= 4)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[3]} readOnly={false}/>:null}
+        {(currentTeam.length >= 4)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[3]} index={3} readOnly={false}/>:null}
 
-        {(currentTeam.length >= 5)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[4]} readOnly={false}/>:null}
+        {(currentTeam.length >= 5)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[4]} index={4} readOnly={false}/>:null}
 
-        {(currentTeam.length >= 6)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[5]} readOnly={false}/>:null}
+        {(currentTeam.length >= 6)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[5]} index={5} readOnly={false}/>:null}
 
       </PokemonTeamContainer>
         

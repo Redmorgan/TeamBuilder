@@ -9,14 +9,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeleteIcon from '../images/deleteIcon.png'
 
 
-const TeamMemberComponent = ({ removeFromTeam, pokemon, readOnly }) => {
+const TeamMemberComponent = ({ removeFromTeam, pokemon, readOnly, index }) => {
 
   return (
 
     <TeamMemberContainer>
 
         {(readOnly == false)?
-        <RemovePokemonTouchable onPress={() => {removeFromTeam(pokemon.name)}} underlayColor={'transparent'} activeOpacity={1}>
+        <RemovePokemonTouchable onPress={() => {removeFromTeam(index)}} underlayColor={'transparent'} activeOpacity={1}>
 
             <RemovePokemonImage source={DeleteIcon}/>
 

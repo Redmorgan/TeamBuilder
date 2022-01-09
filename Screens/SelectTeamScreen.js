@@ -86,7 +86,7 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
     var pokemonURLs = []
 
-    for (var i = 0; i < 10; i++){
+    for (var i = 0; i < pokedexData.length; i++){
 
       var pokemon = pokedexData[i]
 
