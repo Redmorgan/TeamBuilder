@@ -1,9 +1,17 @@
+/**
+ * @fileoverview A component with a loading wheel that is used whilst data from pokeApi is being collected.
+ */
+
 import React from "react";
 import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 
+/**
+ * @summary Loading wheel used when pokedex data is being collected from pokeApi
+ * 
+ * @returns A component containing loading text and a loading wheel
+ */
 const LoadingComponent = () => {
-
 
   return (
 

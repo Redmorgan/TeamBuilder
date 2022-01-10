@@ -39,11 +39,9 @@ const TeamsViewerScreen = ({ navigation }) => {
             const keys = await AsyncStorage.getAllKeys()
             const items = await AsyncStorage.multiGet(keys)
 
-            console.log(items)
-
             setTeamsData(items)
         } catch (error) {
-            console.log(error, "problemo")
+            console.log(error, "Error collecting team data.")
         }
     }
 
@@ -53,8 +51,8 @@ const TeamsViewerScreen = ({ navigation }) => {
             await AsyncStorage.removeItem(key);
             fetchAllItems()
         }
-        catch(exception) {
-            console.log("Error deleting team: " + exception);
+        catch(error) {
+            console.log(error, "Error deleting team.");
         }
 
     }

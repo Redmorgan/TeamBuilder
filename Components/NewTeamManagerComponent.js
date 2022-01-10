@@ -183,7 +183,7 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
    * 
    * @param {String} type - Pokemon Type
    * 
-   * @returns Image based on inputted Type. 
+   * @returns Pokemon type image based on the input.
    */
   function getTypeImage(type){
 

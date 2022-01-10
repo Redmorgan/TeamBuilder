@@ -1,3 +1,6 @@
+/**
+ * @fileoverview The component that displays the pokemon data in the onscreen pokedex.
+ */
 import React, { useState }  from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
@@ -24,7 +27,17 @@ import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
 import AddIcon from '../images/addIcon.png'
 
-const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, addToTeam}) => {
+/**
+ * @param {String} name - The name of the pokemon.
+ * @param {String list} types - The types the pokemon has.
+ * @param {String} spriteURL - URL containing the sprite image of the pokemon.
+ * @param {String} encounterURL - API URL for the encounter data of the pokemon.
+ * @param {String} game - The currently selected game.
+ * @param {Function} addToTeam - Function for adding the pokemon to the stored team.
+ * 
+ * @returns A component containing details about a pokemon
+ */
+const SelectPokemonComponent = ({ name, types, spriteURL, encounterURL, game, addToTeam }) => {
 
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
@@ -39,15 +52,21 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
   const [flavorText, setFlavourText] = useState()
   const [pokemonTab, setPokemonTab] = useState(true)
 
+  /**
+   * @summary Opens the drop down containing the extended information about the selected pokemon.
+   * 
+   * @description When the component is clicked on a drop down section opens containing information about the currently selected
+   * pokemon which only gets loaded when the pokemon is selected in order to cut down on the number of API calls being made.
+   */
   async function expandPokemonData(){
 
     onPressButton()
 
     if(locationData == null){
 
-      setLocationData(await loadEncounterData())
+      setLocationData(loadEncounterData())
 
-      setFlavourText(await loadFlavourText())
+      setFlavourText(loadFlavourText())
 
     }
 
@@ -55,6 +74,11 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
 
   }
 
+  /**
+   * @summary Queries PokeApi to collect a list of all the locations the selected pokemon can appear in that game.
+   * 
+   * @returns {String List} Locations - Containing a list of all the in-game locations that the selected pokemon can be found. 
+   */
   async function loadEncounterData(){
 
     try {
@@ -105,6 +129,13 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
 
   }
 
+  /**
+   * @summary Formats the location by capitalising it and removed unneeded data added by PokeApi.
+   * 
+   * @param {String} locationString - In-game location of the pokemon 
+   * 
+   * @returns A formatted string In-game location string.
+   */
   function formatLocationString(locationString){
 
     locationString = locationString.replace("-area","")
@@ -116,6 +147,11 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
 
   }
 
+  /**
+   * @summary Collects the flavour text of the selected pokemon specifically from the selected game and formats it.
+   * 
+   * @returns {String} FlavourString -  Contains the formatted flavour text of the currently selected pokemon. 
+   */
   async function loadFlavourText(){
 
     var pokemonNumberArr = encounterURL.split("pokemon/")
@@ -158,6 +194,9 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
 
   }
 
+  /**
+   * @summary Opens the description tab of the currently selected pokemon.
+   */
   function openDescription(){
 
     onPressButton()
@@ -165,6 +204,9 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
 
   }
 
+  /**
+   * @summary Opens the locations tab of the currently selected pokemon.
+   */
   function openLocations(){
     
     onPressButton()
@@ -172,6 +214,9 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
 
   }
 
+  /**
+   * @summary Adds the currently selected pokemon to the users team.
+   */
   function addPokemonToTeam(){
 
     onPressButton()
@@ -181,6 +226,7 @@ const SelectPokemonComponent = ({name, types, spriteURL, encounterURL, game, add
 
   }
 
+  // Gets the images for the 1/2 types that a pokemon will have.
   var typeImages = []
 
   for(var i = 0; i < types.length; i++){

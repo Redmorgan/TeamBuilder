@@ -3,8 +3,7 @@ import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
 
-
-//images
+// Images
 import SelectBackground from '../images/SelectBackground.png'
 import BackImage from '../images/BackArrow.png'
 import Oak from '../images/Oak.png'
@@ -25,8 +24,8 @@ const ProfessorIntroScreen = ( { navigation }) => {
           
           try {
             await sound.playAsync()
-          } catch (e) {
-            console.log(e)
+          } catch (error) {
+            console.log(error, "Error playing professor music.")
           }
       }else {
         await sound.stopAsync()

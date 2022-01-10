@@ -1,7 +1,10 @@
+/**
+ * @fileoverview Main Pokedex component that contains flat list that loads all the pokemon that exist in that pokedex. 
+ */
+
 import React, { useState, useEffect } from "react";
 import { Vibration, Alert } from "react-native";
 import styled from "styled-components/native";
-import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from '@expo/vector-icons';
 
 // components
@@ -29,6 +32,14 @@ import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
 
+/**
+ * 
+ * @param {String} game - The currently selected game.
+ * @param {Object List} finalPokemonData - Pokemon data collecting from pokeApi.
+ * @param {Object List} selectedTeam - The currently selected pokemon team.
+ * 
+ * @returns A pokedex component with a list of all the pokemon in it. 
+ */
 const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
 
   const[pokedexData, setPokedexData] = useState([])
@@ -51,7 +62,16 @@ const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
     })()
   },[finalPokemonData])
 
-
+  /**
+   * @summary Filters the flat list based on the search string and the type filter
+   * 
+   * @param {String} searchString - The search string the pokedex is being filtered by.
+   * @param {String} typeFilter - The pokemon type the pokedex is being filtered by.
+   * 
+   * @description Takes in a search string and a type filter in order to filter the currently loaded pokedex
+   * to display only the pokemon with names that match the search string and that match the type set by the type
+   * filter.
+   */
   function filterPokedex(searchString, typeFilter) {
 
     if(finalPokemonData != null){  
@@ -91,6 +111,13 @@ const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
 
   }
 
+    /**
+     * @summary Returns a pokemon type image based on the inputted type.
+     * 
+     * @param {String} type - Pokemon Type 
+     * 
+     * @returns Pokemon type image based on the input.
+     */
   function getTypeImage(type){
 
     if(type == "bug"){
@@ -169,7 +196,11 @@ const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
 
   }
 
-
+  /**
+   * @summary Changes the currently set filter then applies that filter to the pokedex
+   * 
+   * @param {String} type - Pokemon Type 
+   */
   function applyFilter(type){
 
     setCurrentFilter(type)
@@ -177,6 +208,16 @@ const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
 
   }
 
+
+  /**
+   * @summary Adds the selected pokemon to the users team
+   * 
+   * @param {Object} pokemon - Object data of the selected pokemon
+   * 
+   * @description Adds the currently selected pokemon onto the users team if the team currently
+   * has less than 6 pokemon, if they have 6 pokemon an alert pops up on the screen informing the
+   * user that they already have 6 pokemon on their team. 
+   */
   function addPokemonToTeam(pokemon){
 
     if(selectedTeam.length < 6){

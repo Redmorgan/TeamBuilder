@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+/**
+ * @fileoverview Component for the trainer card that displays one of the users saved teams as well as control options for that team.
+ */
+
+import React, { useState, useRef } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
@@ -25,7 +29,13 @@ import Platinum from '../images/logos/Platinum.png'
 import Black from '../images/logos/Black.png'
 import White from '../images/logos/White.png'
 
-
+/**
+ * @param {Object List} teamData - List of objects containing data about the pokemon in the team.
+ * @param {Function} deleteTeam - Function to delete the selected team from async storage.
+ * @param {Function} editTeamData - Function to take the user to the team builder to edit their team.
+ *  
+ * @returns Formatted trainer card with all the pokemon in that particular team. 
+ */
 const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 
     const viewRef = useRef()
@@ -33,6 +43,13 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
     const[gameLogo, setGameLogo] = useState()
     const[deleteState, setDeleteState] = useState(false)
 
+    /**
+     * @summary Plays a "select" sound effect
+     * 
+     * @description This function is used to play a sound effect that is used in the pokemon games when a menu option is selected,
+     * it also causes the device to vibrate for 5ms as another form of touch feedback. Generally this function is triggered every
+     * time an onscreen touchable item is pressed.
+     */
     async function onPressButton(){
         const { sound } = await Audio.Sound.createAsync(
           require('../audio/pressSound.mp3')
@@ -41,6 +58,12 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
         Vibration.vibrate(5)
     }
 
+    /**
+     * @summary Lets the user share an image of their saved pokemon team
+     * 
+     * @description Using the 'share' feature on mobile apps the user is able to share a picture of their saved pokemon team to their
+     * friends and to social media. The app gets temporarily suspended whilst the share overlay is active.
+     */
     async function shareTeam(){
 
         onPressButton()
@@ -49,7 +72,7 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 
             const uri = await captureRef(viewRef, {
                 format: 'png',
-                quality: 0.7
+                quality: 1
             })
 
             await Sharing.shareAsync(uri)
@@ -62,6 +85,11 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 
     }
 
+    /**
+     * @summary Sets the game logo image based off the inputted game name.
+     * 
+     * @param {String} game - Pokemon game name 
+     */
     function getGameLogo(game){
 
         if(game == "red"){
@@ -124,6 +152,12 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 
     }
 
+    /**
+     * @summary Opens the delete team pop-up.
+     * 
+     * @description Runs when the 'Delete' button in order to open the overlay that lets the user
+     * confirm they want to delete the currently selected team.
+     */
     function openDeleteModal(){
 
         onPressButton()
@@ -132,6 +166,12 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 
     }
 
+    /**
+     * @summary Removes the currently selected team from the async storage.
+     * 
+     * @description Runs when the 'Confirm' button on the DeleteTeamModal is pressed which will remove
+     * the team from async storage, closing the overlay, and refreshing the page to remove the deleted team.
+     */
     function removeTeam(){
 
         onPressButton()
@@ -140,6 +180,9 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 
     }
 
+    /**
+     * @summary Takes the user back to the team builder so they can edit their team.
+     */
     function editTeam(){
 
         onPressButton()

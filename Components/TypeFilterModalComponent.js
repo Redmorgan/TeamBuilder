@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
@@ -22,8 +22,6 @@ import PsychicType from '../images/types/Psychic.png'
 import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
-import pokedexIcon from '../images/pokedexIcon.png'
-import pokeballsIcon from '../images/pokeballsIcon.png'
 
 const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
@@ -57,8 +55,6 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
     function confirmFilter(){
 
         onPressButton()
-
-        //setFilter(selectedType)
 
         setFilter(selectedType)
 

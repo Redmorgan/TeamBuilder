@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Vibration } from "react-native";
-import styled from "styled-components/native";
-import { StatusBar } from 'expo-status-bar';
-import { Audio } from 'expo-av'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+/**
+ * @fileoverview Component for displaying a pokemon that is part of one of the users teams.
+ */
 
-// images
+import React from "react";
+import styled from "styled-components/native";
+
+// Immages
 import DeleteIcon from '../images/deleteIcon.png'
 
-
+/**
+ * @param {Function} removeFromTeam - Function for removing the selected pokemon from the team.
+ * @param {Object} pokemon - Object data for the selected pokemon.
+ * @param {Boolean} readOnly - Boolean for checking if the pokemon can be removed from the team or not.
+ * @param {Integer} index - Index position of the pokemon in the team.
+ *  
+ * @returns A component contaiing the sprite of the pokemon as well as its name.
+ */
 const TeamMemberComponent = ({ removeFromTeam, pokemon, readOnly, index }) => {
 
   return (
