@@ -20,6 +20,21 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
   const[pokemonTeam, setPokemonTeam] = useState([])
 
+  const[isTeamLoaded, setTeamLoaded] = useState(false)
+
+
+  if(isTeamLoaded == false){
+
+    if(route.params.selectedTeam != null){
+
+      setTeamLoaded(true)
+
+      setPokemonTeam(route.params.selectedTeam)
+
+    }
+
+  }
+
   async function getPokedexData(){
 
     var pokemonDex = getDexNumber()
@@ -110,7 +125,7 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
     var filteredPokemon = []
 
-    for (var i = 0; i < pokemonURL_Json.length; i++){
+    for (var i = 0; i < 10; i++){//pokemonURL_Json.length; i++){
 
       try {
         const response = await fetch(
@@ -209,8 +224,8 @@ const SelectTeamScreen = ({ navigation, route }) => {
       <StatusBar backgroundColor="#ed1e24" style="inverted" />
 
       {(currentTab)?
-        <PokedexComponent regionData = {route.params.region} game = {route.params.game} finalPokemonData={finalPokemonData} selectedTeam={pokemonTeam}/>:
-        <NewTeamManagerComponent selectedTeam={pokemonTeam} setTeam={setPokemonTeam} navigation={navigation} game = {route.params.game}/>}
+        <PokedexComponent regionData={route.params.region} game={route.params.game} finalPokemonData={finalPokemonData} selectedTeam={pokemonTeam}/>:
+        <NewTeamManagerComponent selectedTeam={pokemonTeam} setTeam={setPokemonTeam} navigation={navigation} game={route.params.game} region={route.params.region} teamID={route.params.teamID}/>}
 
       <SelectTeamTabControls>
 

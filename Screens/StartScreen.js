@@ -2,6 +2,7 @@ import React from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
+import { StatusBar } from 'expo-status-bar';
 
 //images
 import Pokedex from '../images/Pokedex.png'
@@ -34,6 +35,8 @@ const StartScreen = ({ navigation }) => {
   return (
 
 		<MainView>
+
+      <StatusBar backgroundColor="transparent"/>
 
       <PokedexBackground source={Pokedex}>
 

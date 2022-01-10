@@ -1,3 +1,7 @@
+/**
+ * @fileoverview The team member page showing the team that the user has currently selected, as well as the weaknesses of that team.
+ */
+
 import React, { useState, useEffect } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
@@ -24,7 +28,6 @@ import PsychicType from '../images/types/Psychic.png'
 import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
-import DeleteIcon from '../images/deleteIcon.png'
 
 // JSON
 import TypeEffects from '../typeEffects.json'
@@ -32,9 +35,19 @@ import TypeEffects from '../typeEffects.json'
 // Components
 import TeamMemberComponent from "./TeamMemberComponent";
 
-const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) => {
-
-  
+/**
+ * @summary The components building up the team viewer in the application.
+ * 
+ * @param {Object} selectedTeam - The currently selected team.
+ * @param {Function} setTeam - useState function for updating the currently selected team.
+ * @param {Function} navigation - Passed through navigation function for navigation between stacks.
+ * @param {String} game - The currently selected pokemon game i.e. Red, Blue, Yellow.
+ * @param {String} region - The region of the currently selected game i.e. Kanto, Hoenn, Johto.
+ * @param {String} teamID - ID of the team getting updated.
+ * 
+ * @returns The team member page displaying the currently selected team as well as the teams weaknesses
+ */
+const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, region, teamID }) => {
 
   const[weaknesses, setWeaknesses] = useState([])
 
@@ -48,6 +61,14 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
     })()
   },[currentTeam])
 
+
+  /**
+   * @summary Plays a "select" sound effect
+   * 
+   * @description This function is used to play a sound effect that is used in the pokemon games when a menu option is selected,
+   * it also causes the device to vibrate for 5ms as another form of touch feedback. Generally this function is triggered every
+   * time an onscreen touchable item is pressed.
+   */
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
       require('../audio/pressSound.mp3')
@@ -56,6 +77,13 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
     Vibration.vibrate(5)
   }
 
+  /**
+   * @summary Finds the weaknesses of a team based off all of the strengths and weaknesses of the team
+   * 
+   * @description This functions find out what the weaknesses of a selected pokemon team are by comparing all the strengths and
+   * weaknesses of all the pokemon on the team to find out which weaknesses arent covered. This final list gets saved into the useState
+   * 'weaknesses' where a flat list then displays these weaknesses to the user.
+   */
   function calculateWeakness(){
 
     var Strengths = []
@@ -150,6 +178,13 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
 
   }
 
+  /**
+   * @summary Returns a pokemon type image based on the inputted type.
+   * 
+   * @param {String} type - Pokemon Type
+   * 
+   * @returns Image based on inputted Type. 
+   */
   function getTypeImage(type){
 
     if(type == "Bug"){
@@ -228,6 +263,14 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
 
   }
 
+  /**
+   * @summary Removes a selected pokemon from the current team
+   * 
+   * @description Removes the pokemon from the passed through index position from the team and updates the useState storing
+   * the team with the new team that does not have the pokemon that was just removed
+   * 
+   * @param {Integer} teamIndex - Index position of the pokemon on the team
+   */
   function removeFromTeam(teamIndex){
 
     onPressButton()
@@ -246,24 +289,17 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
 
     }
 
-
-    // for(var teamIndex = 0; teamIndex <= currentTeam.length-1; teamIndex++){
-
-    //   var pokemon = currentTeam[teamIndex]
-
-    //   if(pokemon['name'] != name){
-
-    //     updatedTeam.push(currentTeam[teamIndex])
-
-    //   }
-
-    // }
-
     setTeam(updatedTeam)
     setCurrentTeam(updatedTeam)
 
   }
 
+  /**
+   * @summary Saves the currently selected team to the devices storage as well as sending the user back to the homescreen
+   * 
+   * @description This function runs when the 'Complete Team' button is pressed, it saves a copy of the team to the users devices
+   * storage so that it can be accessed later from the 'My Teams' page which can be accessed from the home screen.
+   */
   function onPressSave(){
 
     onPressButton()
@@ -277,18 +313,33 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
 
   }
 
+  /**
+   * @summary Saves/updates a copy of the team to the local storage of the device
+   * 
+   * @description Using Async Storage the currently selected game, region, and team are saved to the local storage of the device
+   * using the current date/time as a unique identifier for the record. If this is a new team a new record is created, if it's a team
+   * that is being updated then the currently selected team is saved against the ID of the team being edited.
+   */
   const saveTeam = async () => {
 
     try {
 
-      var teamID = Date.now()
+      var UID = Date.now()
 
-      teamID = teamID.toString()
+      UID = UID.toString()
 
-      const teamData = {game:game, team:selectedTeam}
+      const teamData = {game:game, region:region, team:selectedTeam}
 
-      await AsyncStorage.setItem(teamID, JSON.stringify(teamData))
-      console.log("Team Saved")
+
+      if(teamID != null){
+
+        await AsyncStorage.setItem(teamID, JSON.stringify(teamData))
+
+      }else{
+
+        await AsyncStorage.setItem(UID, JSON.stringify(teamData))
+
+      }
 
     } catch (e) {
 
@@ -347,7 +398,7 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game }) =>
       {(currentTeam.length >= 1)?
       <SaveTeamButton onPress={()=>{onPressSave()}} underlayColor={'#ed1e24'} activeOpacity={1}>
 
-        <ButtonLabel>Save Team</ButtonLabel>
+        <ButtonLabel>Complete Team</ButtonLabel>
 
       </SaveTeamButton>:null}
 
@@ -439,7 +490,7 @@ const TypeImage = styled.Image`
 
 const SaveTeamButton = styled.TouchableHighlight`
 
-  width:60%
+  width:65%
   height:10%
   margin-top:2.7%
   background-color:#ed1e24

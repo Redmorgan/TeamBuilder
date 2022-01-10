@@ -39,6 +39,8 @@ const TeamsViewerScreen = ({ navigation }) => {
             const keys = await AsyncStorage.getAllKeys()
             const items = await AsyncStorage.multiGet(keys)
 
+            console.log(items)
+
             setTeamsData(items)
         } catch (error) {
             console.log(error, "problemo")
@@ -57,12 +59,18 @@ const TeamsViewerScreen = ({ navigation }) => {
 
     }
 
-    // TESTING FUNCTION - REMOVE ON COMPLETION
-    const clearAsyncStorage = async() => {
-        AsyncStorage.clear();
+    function editTeam(region, game, team, teamID){
+
+        navigation.push('SelectTeam', {region:region, game:game, selectedTeam:team, teamID:teamID})
+
     }
 
-    //clearAsyncStorage()
+    // // TESTING FUNCTION - REMOVE ON COMPLETION
+    // const clearAsyncStorage = async() => {
+    //     AsyncStorage.clear();
+    // }
+
+    // //clearAsyncStorage()
 
     if(isLoaded == false){
 
@@ -93,7 +101,7 @@ const TeamsViewerScreen = ({ navigation }) => {
         <TeamsFlatlist
             data={teamsData}
             keyExtractor={(item) => item}
-            renderItem={({ item }) => (<SavedTeamComponent teamData={item} deleteTeam={deleteTeam}/>)}
+            renderItem={({ item }) => (<SavedTeamComponent teamData={item} deleteTeam={deleteTeam} editTeamData={editTeam}/>)}
             contentContainerStyle={{paddingBottom:10}}/>
 
     </MainView>

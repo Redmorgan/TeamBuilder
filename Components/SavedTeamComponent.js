@@ -7,6 +7,7 @@ import * as Sharing from 'expo-sharing'
 
 // Components
 import TeamMemberComponent from "./TeamMemberComponent";
+import DeleteTeamModalComponent from "./DeleteTeamModal";
 
 // Logos
 import Red from '../images/logos/Red.png'
@@ -25,11 +26,12 @@ import Black from '../images/logos/Black.png'
 import White from '../images/logos/White.png'
 
 
-const SavedTeamComponent = ({ teamData, deleteTeam }) => {
+const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 
     const viewRef = useRef()
 
     const[gameLogo, setGameLogo] = useState()
+    const[deleteState, setDeleteState] = useState(false)
 
     async function onPressButton(){
         const { sound } = await Audio.Sound.createAsync(
@@ -122,11 +124,27 @@ const SavedTeamComponent = ({ teamData, deleteTeam }) => {
 
     }
 
+    function openDeleteModal(){
+
+        onPressButton()
+
+        setDeleteState(true)
+
+    }
+
     function removeTeam(){
 
         onPressButton()
 
         deleteTeam(teamData[0])
+
+    }
+
+    function editTeam(){
+
+        onPressButton()
+
+        editTeamData(team.region, team.game, team.team, teamData[0])
 
     }
 
@@ -139,6 +157,8 @@ const SavedTeamComponent = ({ teamData, deleteTeam }) => {
     return (
 
     <SavedTeamContainer>
+
+        <DeleteTeamModalComponent state={deleteState} deleteTeam={removeTeam} closeDeleteModal={setDeleteState}/>
 
         <SavedTeamCard ref={viewRef}>
 
@@ -161,13 +181,13 @@ const SavedTeamComponent = ({ teamData, deleteTeam }) => {
 
         <TeamControls>
 
-            <TeamControlButton underlayColor={'transparent'} activeOpacity={1}>
+            <TeamControlButton onPress={() => {editTeam()}}  underlayColor={'transparent'} activeOpacity={1}>
 
                 <ButtonLabel>Edit</ButtonLabel>
 
             </TeamControlButton >
 
-            <TeamControlButton onPress={() => {removeTeam()}} underlayColor={'#ed1e24'} activeOpacity={1}>
+            <TeamControlButton onPress={() => {openDeleteModal()}} underlayColor={'#ed1e24'} activeOpacity={1}>
 
                 <ButtonLabel>Delete</ButtonLabel>
 
