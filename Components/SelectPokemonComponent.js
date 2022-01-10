@@ -1,6 +1,7 @@
 /**
  * @fileoverview The component that displays the pokemon data in the onscreen pokedex.
  */
+
 import React, { useState }  from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
@@ -28,12 +29,12 @@ import WaterType from '../images/types/Water.png'
 import AddIcon from '../images/addIcon.png'
 
 /**
- * @param {String} name - The name of the pokemon.
+ * @param {String}      name - The name of the pokemon.
  * @param {String list} types - The types the pokemon has.
- * @param {String} spriteURL - URL containing the sprite image of the pokemon.
- * @param {String} encounterURL - API URL for the encounter data of the pokemon.
- * @param {String} game - The currently selected game.
- * @param {Function} addToTeam - Function for adding the pokemon to the stored team.
+ * @param {String}      spriteURL - URL containing the sprite image of the pokemon.
+ * @param {String}      encounterURL - API URL for the encounter data of the pokemon.
+ * @param {String}      game - The currently selected game.
+ * @param {Function}    addToTeam - Function for adding the pokemon to the stored team.
  * 
  * @returns A component containing details about a pokemon
  */

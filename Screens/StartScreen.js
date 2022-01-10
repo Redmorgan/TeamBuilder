@@ -1,15 +1,33 @@
+/**
+ * @fileoverview Start screen for the application where the user can start to build a team as well as viewing the teams they have made previously.
+ */
+
 import React from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
 import { StatusBar } from 'expo-status-bar';
 
-//images
+// Images
 import Pokedex from '../images/Pokedex.png'
 import TBLogo from '../images/TeamBuilderLogo.png'
 
+/**
+ * @summary Home screen where users can first interact with the app.
+ * 
+ * @param {Function} navigation  - Passed through navigation function for navigation between stacks. 
+ *  
+ * @returns Screen with pokedex background with options to create a new team and look at current teams.
+ */
 const StartScreen = ({ navigation }) => {
 
+  /**
+   * @summary Plays a "select" sound effect.
+   * 
+   * @description This function is used to play a sound effect that is used in the pokemon games when a menu option is selected,
+   * it also causes the device to vibrate for 5ms as another form of touch feedback. Generally this function is triggered every
+   * time an onscreen touchable item is pressed.
+   */
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
       require('../audio/pressSound.mp3')
@@ -18,6 +36,12 @@ const StartScreen = ({ navigation }) => {
     Vibration.vibrate(10)
   }
 
+  /**
+   * @summary Opens the new team path, taking the user to the professor intro.
+   * 
+   * @description When the 'New Team' button is pressed the user is taken to the professor intro where they can start to set
+   * up their new team.
+   */
   function openNewTeam(){
 
     onPressButton()
@@ -25,6 +49,12 @@ const StartScreen = ({ navigation }) => {
 
   }
 
+  /**
+   * @summary Opens the team viewer page, where the user can look at teams they have already made.
+   * 
+   * @description When the 'My Teams' button is pressed the user is taken to the team viewer page where they can view and edit
+   * all the teams they have previosuly made.
+   */
   function openMyTeams(){
 
     onPressButton()

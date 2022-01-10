@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Main file for the team builder where users add pokemon to their team and are able to see the weaknesses their team has.
+ */
+
 import React, { useState, useEffect } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
@@ -12,6 +16,13 @@ import NewTeamManagerComponent from "../Components/NewTeamManagerComponent";
 import pokedexIcon from '../images/pokedexIcon.png'
 import pokeballsIcon from '../images/pokeballsIcon.png'
 
+/**
+ * 
+ * @param {Function} navigation - Passed through navigation function for navigation between stacks. 
+ * @param {Function} route - Pass through data from the previous layer of the stack.
+ *  
+ * @returns Screen displaying pokedex of the selected game.
+ */
 const SelectTeamScreen = ({ navigation, route }) => {
 
   const [currentTab, setCurrentTab] = useState(true)
@@ -35,6 +46,13 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
   }
 
+  /**
+   * @summary Calls pokeApi to collect the pokedex data for the selected game.
+   * 
+   * @description Based on the game the user selects a different pokedex is used. Based on this a different URL is built
+   * for collecting that pokedex data. The data has to be collected through 2 main API calls and 3 functions in order to
+   * collect all the data needed for building the pokedex.
+   */
   async function getPokedexData(){
 
     var pokemonDex = getDexNumber()
@@ -51,6 +69,11 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
   }
 
+  /**
+   * @summary Returns the end of the URL path for the pokedex based on the game that was selected on the SelectGameScreen.
+   * 
+   * @returns The ending of the URL for the pokedex based on the selected games region.
+   */
   function getDexNumber(){
 
     var region = route.params.region
@@ -83,6 +106,13 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
   }
 
+  /**
+   * @summary Calls pokeApi to collect all the pokemon from the pokedex of the selected game.
+   * 
+   * @param {String} url - URL for the API to collect the pokedex data of the selected game.
+   * 
+   * @returns JSON containing data about all the pokemon in the selected games pokedex.
+   */
   const getPokemonFromPokedex = async (url) => {
     try {
       const response = await fetch(
@@ -97,6 +127,13 @@ const SelectTeamScreen = ({ navigation, route }) => {
     }
   }
 
+  /**
+   * @summary Produces a list of URLs used for calling the API to collect data on all the pokemon.
+   * 
+   * @param {Object List} pokedexData - List of pokemon collected from the pokedex.
+   *  
+   * @returns List of URLs used to get the data needed for forming the pokedex.
+   */
   function getPokemonDataURLs(pokedexData){
 
     var pokemonURLs = []
@@ -121,6 +158,13 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
   }
 
+  /**
+   * @summary Using the list produced by getPokemonDataURLs, it calls them all to collect data for all of the pokemon.
+   * 
+   * @param {String List} pokemonURL_Json - List of all the built pokeApi URLs
+   * 
+   * @returns Object data of all the pokemon in the pokedex for the selected game. 
+   */
   const getPokemonDataFromURLs = async (pokemonURL_Json) => {
 
     var filteredPokemon = []
@@ -162,6 +206,13 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
   }
 
+  /**
+   * @summary Takes the types object, formats the text, and puts them into a string list.
+   * 
+   * @param {Object} typeObject - Contains the types a pokemon has.
+   *  
+   * @returns A string list of formatted types.
+   */
   function sortTypeData(typeObject){
 
     var types = []
@@ -194,6 +245,13 @@ const SelectTeamScreen = ({ navigation, route }) => {
     })()
   },[])
 
+  /**
+   * @summary Plays a "select" sound effect
+   * 
+   * @description This function is used to play a sound effect that is used in the pokemon games when a menu option is selected,
+   * it also causes the device to vibrate for 5ms as another form of touch feedback. Generally this function is triggered every
+   * time an onscreen touchable item is pressed.
+   */
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
       require('../audio/pressSound.mp3')
@@ -202,6 +260,12 @@ const SelectTeamScreen = ({ navigation, route }) => {
     Vibration.vibrate(5)
   }
 
+  /**
+   * @summary Opens the pokedex tab.
+   * 
+   * @description When the pokedex tab at the bottom of the screen is pressed, this function runs which opens the pokedex tab if it
+   * is not already open.
+   */
   function openPokedexTab(){
 
     onPressButton()
@@ -209,13 +273,18 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
   }
 
+  /**
+   * @summary Opens the manage team tab.
+   * 
+   * @description When the manage team tab at the bottom of the screen is pressed, this function runs which opens the manage team tab if it
+   * is not already open.
+   */
   function openManageTeamTab(){
 
     onPressButton()
     setCurrentTab(false)
 
   }
-
 
   return (
 

@@ -9,10 +9,10 @@ import styled from "styled-components/native";
 import DeleteIcon from '../images/deleteIcon.png'
 
 /**
- * @param {Function} removeFromTeam - Function for removing the selected pokemon from the team.
- * @param {Object} pokemon - Object data for the selected pokemon.
- * @param {Boolean} readOnly - Boolean for checking if the pokemon can be removed from the team or not.
- * @param {Integer} index - Index position of the pokemon in the team.
+ * @param {Function}  removeFromTeam - Function for removing the selected pokemon from the team.
+ * @param {Object}    pokemon - Object data for the selected pokemon.
+ * @param {Boolean}   readOnly - Boolean for checking if the pokemon can be removed from the team or not.
+ * @param {Integer}   index - Index position of the pokemon in the team.
  *  
  * @returns A component contaiing the sprite of the pokemon as well as its name.
  */

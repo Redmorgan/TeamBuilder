@@ -31,8 +31,8 @@ import White from '../images/logos/White.png'
 
 /**
  * @param {Object List} teamData - List of objects containing data about the pokemon in the team.
- * @param {Function} deleteTeam - Function to delete the selected team from async storage.
- * @param {Function} editTeamData - Function to take the user to the team builder to edit their team.
+ * @param {Function}    deleteTeam - Function to delete the selected team from async storage.
+ * @param {Function}    editTeamData - Function to take the user to the team builder to edit their team.
  *  
  * @returns Formatted trainer card with all the pokemon in that particular team. 
  */

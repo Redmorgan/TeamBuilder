@@ -1,8 +1,11 @@
+/**
+ * @fileoverview Screen for displaying games for use to select from to build a team for.
+ */
+
 import React, { useState } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from 'expo-av'
-
 
 // Components
 import SelectGameComponent from "../Components/SelectGameComponent";
@@ -27,26 +30,42 @@ import Platinum from '../images/logos/Platinum.png'
 import Black from '../images/logos/Black.png'
 import White from '../images/logos/White.png'
 
+/**
+ * @param {Function} navigation - Passed through navigation function for navigation between stacks. 
+ * 
+ * @returns Screen with flat list displaying games to choose from.
+ */
 const SelectGameScreen = ({ navigation }) => {
 
+  const [selectionState, selectGame] = useState("none");
 
-    async function onPressButton(){
-        const { sound } = await Audio.Sound.createAsync(
-          require('../audio/pressSound.mp3')
-        );
-        await sound.playAsync()
-        Vibration.vibrate(5)
+  /**
+   * @summary Plays a "select" sound effect
+   * 
+   * @description This function is used to play a sound effect that is used in the pokemon games when a menu option is selected,
+   * it also causes the device to vibrate for 5ms as another form of touch feedback. Generally this function is triggered every
+   * time an onscreen touchable item is pressed.
+   */
+  async function onPressButton(){
+    const { sound } = await Audio.Sound.createAsync(
+      require('../audio/pressSound.mp3')
+    );
+    await sound.playAsync()
+    Vibration.vibrate(5)
+  }
 
-      }
+  /**
+   * @summary Takes the user to the professor outro screen
+   * 
+   * @description Once the user has selected a game the confirmation button appears, once they press that this function runs which
+   * takes the user to the professor outro screen as well as passing through the selected game.
+   */
+  function gotoOutro(){
 
-    const [selectionState, selectGame] = useState("none");
+    onPressButton();
+    navigation.push('ProfessorOutro', {selectedGame:selectionState})
 
-    function gotoOutro(){
-
-        onPressButton();
-        navigation.push('ProfessorOutro', {selectedGame:selectionState})
-
-    }
+  }
 
   return (
 

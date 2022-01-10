@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Modal for letting users select what type they want to filter the pokedex by.
+ */
+
 import React, { useState } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
@@ -23,8 +27,25 @@ import RockType from '../images/types/Rock.png'
 import SteelType from '../images/types/Steel.png'
 import WaterType from '../images/types/Water.png'
 
+/**
+ * 
+ * @param {Boolean}     state - The current open/close state of the types modal.
+ * @param {Function}    closeFilterOverlay - Function for opening/closing the types modal.
+ * @param {Function}    setFilter - Function for setting the type to filter the pokedex by.
+ *  
+ * @returns A modal containing a list of pokemon types. 
+ */
 const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
+    const[selectedType, selectType] = useState()
+
+    /**
+     * @summary Plays a "select" sound effect
+     * 
+     * @description This function is used to play a sound effect that is used in the pokemon games when a menu option is selected,
+     * it also causes the device to vibrate for 5ms as another form of touch feedback. Generally this function is triggered every
+     * time an onscreen touchable item is pressed.
+     */
     async function onPressButton(){
         const { sound } = await Audio.Sound.createAsync(
           require('../audio/pressSound.mp3')
@@ -33,8 +54,14 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
         Vibration.vibrate(5)
     }
 
-    const[selectedType, selectType] = useState()
-
+    /**
+     * @summary Sets the current filter based on which type was clicked on.
+     * 
+     * @param {String} type 
+     * 
+     * @description Runs when one of the type icons is pressed which will put a border around that type to show that it has been
+     * selected.
+     */
     function selectTypeFilter(type){
 
         onPressButton()
@@ -42,7 +69,13 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
     }
 
-    function cancelFilter(){
+    /**
+     * @summary Closes the filter pop-up as well as removing any currently set type filters.
+     * 
+     * @description Runs when the 'Clear' button has been clicked by the user, once it has been the type pop-up closes and the
+     * type filter gets cleared.
+     */
+    function clearFilter(){
 
         onPressButton()
 
@@ -52,6 +85,12 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
     }
 
+    /**
+     * @summary Confirms setting the currently selected type filter as the type to filter the pokedex by.
+     * 
+     * @description Runs when the 'Confirm' button is pressed which then applies the type filter to the pokedex, closes the type pop-up,
+     * and updates the filter icon to show what type is currently being filtered by.
+     */
     function confirmFilter(){
 
         onPressButton()
@@ -189,9 +228,9 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
                 <FilterControls>
 
-                    <ClearFilterButton onPress={() => {cancelFilter()}} activeOpacity={1} underlayColor={'#ed1e24'}>
+                    <ClearFilterButton onPress={() => {clearFilter()}} activeOpacity={1} underlayColor={'#ed1e24'}>
 
-                        <ButtonLabel>Cancel</ButtonLabel>
+                        <ButtonLabel>Clear</ButtonLabel>
 
                     </ClearFilterButton>
 

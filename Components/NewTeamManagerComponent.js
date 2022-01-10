@@ -38,12 +38,12 @@ import TeamMemberComponent from "./TeamMemberComponent";
 /**
  * @summary The components building up the team viewer in the application.
  * 
- * @param {Object} selectedTeam - The currently selected team.
- * @param {Function} setTeam - useState function for updating the currently selected team.
- * @param {Function} navigation - Passed through navigation function for navigation between stacks.
- * @param {String} game - The currently selected pokemon game i.e. Red, Blue, Yellow.
- * @param {String} region - The region of the currently selected game i.e. Kanto, Hoenn, Johto.
- * @param {String} teamID - ID of the team getting updated.
+ * @param {Object}    selectedTeam - The currently selected team.
+ * @param {Function}  setTeam - useState function for updating the currently selected team.
+ * @param {Function}  navigation - Passed through navigation function for navigation between stacks.
+ * @param {String}    game - The currently selected pokemon game i.e. Red, Blue, Yellow.
+ * @param {String}    region - The region of the currently selected game i.e. Kanto, Hoenn, Johto.
+ * @param {String}    teamID - ID of the team getting updated.
  * 
  * @returns The team member page displaying the currently selected team as well as the teams weaknesses
  */

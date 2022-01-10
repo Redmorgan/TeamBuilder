@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Screen for displaying the intro of the professors speech.
+ */
+
 import React, { useEffect, useState } from "react";
 import { Vibration } from "react-native";
 import styled from "styled-components/native";
@@ -10,11 +14,22 @@ import Oak from '../images/Oak.png'
 import TextBoxImage from '../images/TextBox.png'
 import BobberGif from '../images/Bobber.gif'
 
+/**
+ * @param {Function} navigation - Passed through navigation function for navigation between stacks.
+ *  
+ * @returns Intro screen for the professors speech. 
+ */
 const ProfessorIntroScreen = ( { navigation }) => {
 
   const [musicStatus, setMusicStatus] = useState(true)
-  const [sound, setSound] = useState(new Audio.Sound());
+  const [sound, setSound] = useState(new Audio.Sound())
+  const [profText, nextProfText] = useState(1)
 
+
+  /**
+   * Loads and plays the professor background music as well as storing the sound object in a global so that it can be unloaded
+   * later on. This is much easier than passing it all the way through as a prop.
+   */
   useEffect(()=>{
     (async () => {
       if (musicStatus) {
@@ -34,6 +49,13 @@ const ProfessorIntroScreen = ( { navigation }) => {
     })()
   },[musicStatus])
 
+  /**
+   * @summary Plays a "select" sound effect
+   * 
+   * @description This function is used to play a sound effect that is used in the pokemon games when a menu option is selected,
+   * it also causes the device to vibrate for 5ms as another form of touch feedback. Generally this function is triggered every
+   * time an onscreen touchable item is pressed.
+   */
   async function onPressButton(){
     const { sound } = await Audio.Sound.createAsync(
       require('../audio/pressSound.mp3')
@@ -42,8 +64,12 @@ const ProfessorIntroScreen = ( { navigation }) => {
     Vibration.vibrate(5)
   }
 
-  const [profText, nextProfText] = useState(1);
-
+  /**
+   * @summary Takes the user to the next professor speech box
+   * 
+   * @description When the user presses the speech box it will go onto the next string of text for the user to read, once it reaches the last text
+   * box the next press will take the user to the SelectGameScreen to select a game to make a team for.
+   */
   function nextText(){
 
     if(profText == 1){
@@ -60,6 +86,12 @@ const ProfessorIntroScreen = ( { navigation }) => {
 
   }
 
+  /**
+   * @summary Takes the user back to the previous screen
+   * 
+   * @description This function runs when the user presses the previous page button. It will take the user back to the previous level of the stack.
+   * It also cancels the professor music as it should not play when the user is on the home screen.
+   */
   async function previousScreen(){
 
     setMusicStatus(false)

@@ -34,7 +34,7 @@ import WaterType from '../images/types/Water.png'
 
 /**
  * 
- * @param {String} game - The currently selected game.
+ * @param {String}      game - The currently selected game.
  * @param {Object List} finalPokemonData - Pokemon data collecting from pokeApi.
  * @param {Object List} selectedTeam - The currently selected pokemon team.
  * 
@@ -231,7 +231,7 @@ const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
         "You already have 6 pokemon on your team.",
         [
           {
-            text: "Cancel",
+            text: "OK",
             style: "cancel",
           },
         ],

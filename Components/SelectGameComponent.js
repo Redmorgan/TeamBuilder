@@ -8,10 +8,10 @@ import styled from "styled-components/native";
 import { Audio } from 'expo-av'
 
 /**
- * @param {Image} logoImg - Game image logo
- * @param {Function} onPress - Function for selecting the current component
- * @param {String} game - Pokemon game i.e. Red, Blue, Yellow
- * @param {String} selectedGame - The currently selected game
+ * @param {Image}     logoImg - Game image logo
+ * @param {Function}  onPress - Function for selecting the current component
+ * @param {String}    game - Pokemon game i.e. Red, Blue, Yellow
+ * @param {String}    selectedGame - The currently selected game
  *  
  * @returns 
  */
