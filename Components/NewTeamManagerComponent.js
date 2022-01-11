@@ -90,21 +90,21 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
     var Weaknesses = []
     var calculatedWeaknesses = []
 
-    for(var i = 0; i <= currentTeam.length-1; i++){
+    for(var i = 0; i < currentTeam.length; i++){
 
       var pokemon = currentTeam[i]
 
-      for(var j = 0; j <= pokemon.types.length-1; j++){
+      for(var j = 0; j < pokemon.types.length; j++){
 
-        for(var k = 0; k <= TypeEffects.length-1; k++){
+        for(var k = 0; k < TypeEffects.length; k++){
 
           if(pokemon.types[j] == TypeEffects[k].name){
 
-            for(var l = 0; l <= TypeEffects[k].strengths.length-1; l++){
+            for(var l = 0; l < TypeEffects[k].strengths.length; l++){
               
               var duplicate = false;
 
-              for(var m = 0; m <= Strengths.length-1; m++){
+              for(var m = 0; m < Strengths.length; m++){
 
                 if(Strengths[m] == TypeEffects[k].strengths[l]){
 
@@ -114,6 +114,8 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
 
               }
 
+              //console.log(TypeEffects[k].strengths[l])
+
               if(duplicate == false){
 
                 Strengths.push(TypeEffects[k].strengths[l])
@@ -122,11 +124,11 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
 
             }
 
-            for(var l = 0; l <= TypeEffects[k].weaknesses.length-1; l++){
+            for(var l = 0; l < TypeEffects[k].weaknesses.length; l++){
 
               var duplicate = false
 
-              for(var m = 0; m <= Weaknesses.length-1; m++){
+              for(var m = 0; m < Weaknesses.length; m++){
 
                 if(Weaknesses[m] == TypeEffects[k].weaknesses[l]){
 
@@ -152,6 +154,9 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
 
     }
 
+    console.log(Strengths)
+    console.log(Weaknesses)
+
     for(var i = 0; i <= Weaknesses.length-1; i++){
 
       var duplicate = false
@@ -174,7 +179,16 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
 
     }
 
-    setWeaknesses(calculatedWeaknesses)
+    if(currentTeam.length == 1){
+
+      setWeaknesses(Weaknesses)
+
+    }else{
+
+      setWeaknesses(calculatedWeaknesses)
+
+    }
+    
 
   }
 
@@ -391,7 +405,7 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
       {(currentTeam.length >= 1)?
       <TypeEffectivenessContainer>
 
-        <TypeEffectiveTitle>Weak Against:</TypeEffectiveTitle>
+        <TypeEffectiveTitle>Team Weak Against:</TypeEffectiveTitle>
 
         <TypeEffectivenessList>
 
@@ -503,12 +517,13 @@ const WeaknessFlatList = styled.FlatList`
   flex-direction:row
   flex-wrap:wrap
 
+
 `
 
 const TypeImage = styled.Image`
 
-  width:60px
-  height:60px
+  width:65px
+  height:65px
   margin-right:10px
   margin-bottom:10px
 

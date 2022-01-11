@@ -171,7 +171,7 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
     var filteredPokemon = []
 
-    for (var i = 0; i < 10; i++){//pokemonURL_Json.length; i++){
+    for (var i = 0; i < pokemonURL_Json.length; i++){
 
       try {
         const response = await fetch(

@@ -2,11 +2,16 @@
  * @fileoverview Component for displaying a pokemon that is part of one of the users teams.
  */
 
-import React from "react";
+ import React, { useState } from "react";
 import styled from "styled-components/native";
+import { Vibration } from "react-native";
+import { Audio } from 'expo-av'
 
-// Immages
+// Images
 import DeleteIcon from '../images/deleteIcon.png'
+
+// Components
+import WeaknessModalComponent from "./WeaknessModal";
 
 /**
  * @param {Function}  removeFromTeam - Function for removing the selected pokemon from the team.
@@ -18,20 +23,60 @@ import DeleteIcon from '../images/deleteIcon.png'
  */
 const TeamMemberComponent = ({ removeFromTeam, pokemon, readOnly, index }) => {
 
+  const[weaknessState, setWeaknessState] = useState(false)
+
+  /**
+   * @summary Plays a "select" sound effect
+   * 
+   * @description This function is used to play a sound effect that is used in the pokemon games when a menu option is selected,
+   * it also causes the device to vibrate for 5ms as another form of touch feedback. Generally this function is triggered every
+   * time an onscreen touchable item is pressed.
+   */
+   async function onPressButton(){
+    const { sound } = await Audio.Sound.createAsync(
+      require('../audio/pressSound.mp3')
+    );
+    await sound.playAsync()
+    Vibration.vibrate(5)
+  }
+
+  /**
+   * @summary Opens the pokemon weakness modal.
+   * 
+   * @description Opens a modal containing all the weaknesses of the pokemon that was selected.
+   */
+  function openWeaknessModal(){
+
+    onPressButton()
+
+    setWeaknessState(true)
+
+  }
+
+
   return (
 
     <TeamMemberContainer>
 
-        {(readOnly == false)?
-        <RemovePokemonTouchable onPress={() => {removeFromTeam(index)}} underlayColor={'transparent'} activeOpacity={1}>
+      <WeaknessModalComponent state={weaknessState} types={pokemon.types} closeWeaknessModal={setWeaknessState}/>
 
-            <RemovePokemonImage source={DeleteIcon}/>
+      {(readOnly == false)?
+      <RemovePokemonTouchable onPress={() => {removeFromTeam(index)}} underlayColor={'transparent'} activeOpacity={1}>
 
-        </RemovePokemonTouchable>:null}
+        <RemovePokemonImage source={DeleteIcon}/>
+
+      </RemovePokemonTouchable>:null}
+
+      {(readOnly == false)?
+      <TouchablePokemonSprite onPress={()=>{openWeaknessModal()}} underlayColor={'transparent'} activeOpacity={1}>
 
         <PokemonSprite resizeMode="contain" source={{uri:pokemon.spriteURL}}/>
+        
+      </TouchablePokemonSprite>:
 
-        <PokemonName>{pokemon.name}</PokemonName>
+      <PokemonSprite resizeMode="contain" source={{uri:pokemon.spriteURL}}/>}
+
+      <PokemonName>{pokemon.name}</PokemonName>
 
     </TeamMemberContainer>
 
@@ -48,10 +93,17 @@ const TeamMemberContainer = styled.View`
 
 `
 
+const TouchablePokemonSprite = styled.TouchableHighlight`
+
+  width:90%
+  height:90%
+
+`
+
 const PokemonSprite = styled.Image`
 
-  height:90%
-  width:90%
+  height:100%
+  width:100%
 
 `
 

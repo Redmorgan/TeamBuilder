@@ -10,9 +10,9 @@ import { Entypo } from '@expo/vector-icons';
 /**
  * @summary A pop-up that asks the user if they are sure they want to delete the currently selected team.
  * 
- * @param {Boolean}     state - The current open/close state of the modal
- * @param {Function}    deleteTeam - The function used for deleting the team
- * @param {Function}    closeDeleteModal - The function that opens/closes the delete team mdoal
+ * @param {Boolean}     state - The current open/close state of the modal.
+ * @param {Function}    deleteTeam - The function used for deleting the team.
+ * @param {Function}    closeDeleteModal - The function that opens/closes the delete team modal.
  *  
  * @returns A formatted modal.
  */
