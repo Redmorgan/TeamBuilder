@@ -37,7 +37,7 @@ import WaterType from '../images/types/Water.png'
  */
 const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
-    const[selectedType, selectType] = useState()
+    const[selectedType, selectType] = useState("none")
 
     /**
      * @summary Plays a "select" sound effect
@@ -80,6 +80,8 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
         onPressButton()
 
         setFilter("none")
+
+        selectType("none")
 
         closeFilterOverlay()
 
