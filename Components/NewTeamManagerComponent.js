@@ -366,6 +366,14 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
 
       <PokemonTeamContainer>
 
+        {(currentTeam == null || currentTeam.length == 0)? 
+        
+        <NoTeamContainer>
+
+          <NoTeamText>Add a pokemon to your team to get started.</NoTeamText>
+
+        </NoTeamContainer>:null}
+
         {(currentTeam.length >= 1)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[0]} index={0} readOnly={false}/>:null}
 
         {(currentTeam.length >= 2)? <TeamMemberComponent removeFromTeam={removeFromTeam} pokemon={currentTeam[1]} index={1} readOnly={false}/>:null}
@@ -437,6 +445,21 @@ const TeamHeaderLabel = styled.Text`
 
   font-family:PokemonStyle
   font-size:60px
+
+`
+
+const NoTeamContainer = styled.View`
+
+  width:100%
+  align-items:center
+
+`
+
+const NoTeamText = styled.Text`
+
+  font-family:PokemonStyle
+  font-size:50px
+  text-align:center
 
 `
 

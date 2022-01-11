@@ -106,13 +106,6 @@ const TeamsViewerScreen = ({ navigation }) => {
 
     }
 
-    // // TESTING FUNCTION - REMOVE ON COMPLETION
-    // const clearAsyncStorage = async() => {
-    //     AsyncStorage.clear();
-    // }
-
-    // //clearAsyncStorage()
-
     if(isLoaded == false){
 
         fetchAllItems()
@@ -138,6 +131,14 @@ const TeamsViewerScreen = ({ navigation }) => {
             <HeaderLabel>My Teams</HeaderLabel>
 
         </ViewTeamsHeader>
+
+        {(teamsData == null || teamsData.length == 0)? 
+        
+        <NoTeamContainer>
+
+          <NoTeamText>You haven't got any teams yet, to get started press the NEW GAME button on the home screen.</NoTeamText>
+
+        </NoTeamContainer>:null}
 
         <TeamsFlatlist
             data={teamsData}
@@ -203,6 +204,22 @@ const TeamsFlatlist = styled.FlatList`
     width:100%
     background-color:#F5F5F5
     padding-top:10px
+
+`
+
+const NoTeamContainer = styled.View`
+
+    margin-top:20px
+    width:95%
+    align-items:center
+
+`
+
+const NoTeamText = styled.Text`
+
+  font-family:PokemonStyle
+  font-size:45px
+  text-align:center
 
 `
 

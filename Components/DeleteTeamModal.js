@@ -80,15 +80,15 @@ const DeleteTeamModalComponent = ({ state, deleteTeam, closeDeleteModal }) => {
 
                 <ControlButtonsContainer>
 
-                    <ConfirmButton onPress={() => {confirmDeleteTeam()}} underlayColor={'green'} activeOpacity={1}>
+                    <ConfirmButton onPress={() => {confirmDeleteTeam()}} underlayColor={'transparent'} activeOpacity={1}>
 
-                        <ButtonLabel>Confirm</ButtonLabel>
+                        <Entypo name="check" size={50} color="black" />
 
                     </ConfirmButton>
 
-                    <CancelButton onPress={() => {closeOverlay()}} underlayColor={'#ed1e24'} activeOpacity={1}>
+                    <CancelButton onPress={() => {closeOverlay()}} underlayColor={'transparent'} activeOpacity={1}>
                         
-                        <ButtonLabel>Cancel</ButtonLabel>    
+                        <Entypo name="cross" size={50} color="black" />  
                         
                     </CancelButton>                    
 
@@ -149,8 +149,6 @@ const ConfirmButton = styled.TouchableHighlight`
 
     width:48%
     height:100%
-    background-color:green
-    border-radius:10px
     justify-content:center
     align-items:center
 
@@ -160,17 +158,8 @@ const CancelButton = styled.TouchableHighlight`
 
     width:48%
     height:100%
-    background-color:#ed1e24
-    border-radius:10px
     justify-content:center
     align-items:center
-
-`
-
-const ButtonLabel = styled.Text`
-
-    font-family:PokemonStyle
-    font-size:40px
 
 `
 

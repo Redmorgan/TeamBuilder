@@ -110,9 +110,9 @@ const SelectGameScreen = ({ navigation }) => {
         </GameContainer>
 
         {(selectionState != "none")?
-        <ConfirmGameButton onPress={() => {gotoOutro()}} underlayColor={'#c7e8f4'} activeOpacity={1}>
+        <ConfirmGameButton onPress={() => {gotoOutro()}} underlayColor={'#a3cede'} activeOpacity={1}>
 
-            <ConfirmText style={{fontFamily:"PokemonStyle"}}>Confirm Selection</ConfirmText>    
+          <ConfirmText style={{fontFamily:"PokemonStyle"}}>Confirm Selection</ConfirmText>    
             
         </ConfirmGameButton>: null}        
 
