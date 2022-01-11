@@ -224,21 +224,21 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 
         <TeamControls>
 
-            <TeamControlButton onPress={() => {editTeam()}}  underlayColor={'transparent'} activeOpacity={1}>
+            <TeamControlButton onPress={() => {editTeam()}}  underlayColor={'#c2191e'} activeOpacity={1}>
 
                 <ButtonLabel>Edit</ButtonLabel>
 
             </TeamControlButton >
 
-            <TeamControlButton onPress={() => {openDeleteModal()}} underlayColor={'#ed1e24'} activeOpacity={1}>
+            <TeamControlButton onPress={() => {shareTeam()}} underlayColor={'#c2191e'} activeOpacity={1}>
 
-                <ButtonLabel>Delete</ButtonLabel>
+                <ButtonLabel>Share</ButtonLabel>
 
             </TeamControlButton>
 
-            <TeamControlButton onPress={() => {shareTeam()}} underlayColor={'#ed1e24'} activeOpacity={1}>
+            <TeamControlButton onPress={() => {openDeleteModal()}} underlayColor={'#c2191e'} activeOpacity={1}>
 
-                <ButtonLabel>Share</ButtonLabel>
+                <ButtonLabel>Delete</ButtonLabel>
 
             </TeamControlButton>
 

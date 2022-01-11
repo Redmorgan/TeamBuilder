@@ -42,6 +42,8 @@ const SelectTeamScreen = ({ navigation, route }) => {
 
       setPokemonTeam(route.params.selectedTeam)
 
+      setCurrentTab(false)
+
     }
 
   }

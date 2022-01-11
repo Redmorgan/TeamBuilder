@@ -65,9 +65,9 @@ const SelectPokemonComponent = ({ name, types, spriteURL, encounterURL, game, ad
 
     if(locationData == null){
 
-      setLocationData(loadEncounterData())
+      setLocationData(await loadEncounterData())
 
-      setFlavourText(loadFlavourText())
+      setFlavourText(await loadFlavourText())
 
     }
 
@@ -330,7 +330,7 @@ const SelectPokemonComponent = ({ name, types, spriteURL, encounterURL, game, ad
 
             </PokemonTypesContainer>
 
-            <AddPokemonTouchable onPress={() => {addPokemonToTeam()}} underlayColor={'transparent'} activeOpacity={1}>
+            <AddPokemonTouchable onPress={() => {addPokemonToTeam()}} underlayColor={'#A9A9A9'} activeOpacity={1}>
 
               <AddPokemonIcon source={AddIcon}/>
 
@@ -363,13 +363,13 @@ const SelectPokemonComponent = ({ name, types, spriteURL, encounterURL, game, ad
             
             <PokemonDataTabs>
 
-              <PokemonDescriptionButton onPress={()=>{openDescription()}} underlayColor={'#ed1e24'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#c2191e":"#ed1e24"}}>
+              <PokemonDescriptionButton onPress={()=>{openDescription()}} underlayColor={'#c2191e'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#c2191e":"#ed1e24"}}>
 
                 <ButtonLabel>Desc</ButtonLabel>
 
               </PokemonDescriptionButton>
 
-              <PokemonLocationButton onPress={()=>{openLocations()}} underlayColor={'#ed1e24'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#ed1e24":"#c2191e"}}>
+              <PokemonLocationButton onPress={()=>{openLocations()}} underlayColor={'#c2191e'} activeOpacity={1} style={{backgroundColor:pokemonTab ? "#ed1e24":"#c2191e"}}>
 
                 <ButtonLabel>Locations</ButtonLabel>
 

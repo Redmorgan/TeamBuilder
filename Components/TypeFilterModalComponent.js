@@ -228,13 +228,13 @@ const TypeFilterModalComponent = ({ state, closeFilterOverlay, setFilter }) => {
 
                 <FilterControls>
 
-                    <ClearFilterButton onPress={() => {clearFilter()}} activeOpacity={1} underlayColor={'#ed1e24'}>
+                    <ClearFilterButton onPress={() => {clearFilter()}} activeOpacity={1} underlayColor={'#c2191e'}>
 
                         <ButtonLabel>Clear</ButtonLabel>
 
                     </ClearFilterButton>
 
-                    <ConfirmFilterButton onPress={() => {confirmFilter()}} activeOpacity={1} underlayColor={'green'}>
+                    <ConfirmFilterButton onPress={() => {confirmFilter()}} activeOpacity={1} underlayColor={'#006400'}>
 
                         <ButtonLabel>Confirm</ButtonLabel>
      

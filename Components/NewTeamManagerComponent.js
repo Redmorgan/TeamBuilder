@@ -311,6 +311,9 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
       routes: [{ name: 'Start' }]
     })
 
+    navigation.push('Start')
+    navigation.push('ViewTeams')
+
   }
 
   /**
@@ -396,7 +399,7 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
       </TypeEffectivenessContainer>:null}
 
       {(currentTeam.length >= 1)?
-      <SaveTeamButton onPress={()=>{onPressSave()}} underlayColor={'#ed1e24'} activeOpacity={1}>
+      <SaveTeamButton onPress={()=>{onPressSave()}} underlayColor={'#c2191e'} activeOpacity={1}>
 
         <ButtonLabel>Complete Team</ButtonLabel>
 

@@ -267,10 +267,9 @@ const PokedexComponent = ({ game, finalPokemonData, selectedTeam }) => {
 
             <PokemonSearchBarContainer>
 
-            <PokemonSearchBar onChangeText={text => filterPokedex(text, currentFilter)}/>
+              <PokemonSearchBar placeholder="Search Pokedex" onChangeText={text => filterPokedex(text, currentFilter)}/>
 
-            <AntDesign name="search1" size={40} color="black" />
-            
+              <AntDesign name="search1" size={40} color="black" />
 
             </PokemonSearchBarContainer>
 
