@@ -58,7 +58,7 @@ const TeamMemberComponent = ({ removeFromTeam, pokemon, readOnly, index }) => {
 
     <TeamMemberContainer>
 
-      <WeaknessModalComponent state={weaknessState} types={pokemon.types} closeWeaknessModal={setWeaknessState}/>
+      <WeaknessModalComponent state={weaknessState} types={pokemon.types} name={pokemon.name} closeWeaknessModal={setWeaknessState}/>
 
       {(readOnly == false)?
       <RemovePokemonTouchable onPress={() => {removeFromTeam(index)}} underlayColor={'transparent'} activeOpacity={1}>

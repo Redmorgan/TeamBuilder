@@ -39,7 +39,7 @@ import TypeEffects from '../typeEffects.json'
   *  
   * @returns A formatted modal.
   */
- const WeaknessModalComponent = ({ state, types, closeWeaknessModal }) => {
+ const WeaknessModalComponent = ({ state, types, name, closeWeaknessModal }) => {
  
      /**
       * @summary Plays a "select" sound effect
@@ -205,6 +205,8 @@ import TypeEffects from '../typeEffects.json'
 
                 </CloseModalButton>
 
+                <WeaknessHeader style={{marginTop:10}}>{name}</WeaknessHeader>
+
                 <WeaknessHeader>Weaknesses</WeaknessHeader>
 
                 <WeaknessListWrapper>
@@ -242,7 +244,7 @@ const WeaknessContainer = styled.View`
 const WeaknessBody = styled.View`
  
     width:80%
-    height:30%
+    height:35%
     background-color:#ffffff
     border-radius:20px
     border: 4px solid #000000
@@ -254,7 +256,6 @@ const WeaknessHeader = styled.Text`
  
     font-family:PokemonStyle
     font-size:40px
-    margin-top:10px
     text-align:center
  
 `
