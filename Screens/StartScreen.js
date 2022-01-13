@@ -72,13 +72,13 @@ const StartScreen = ({ navigation }) => {
 
         <TeamBuilderLogo source={TBLogo} resizeMode="contain"/>
 
-        <NewTeamButton onPress={() => {openNewTeam()}} underlayColor={'#fad602'} activeOpacity={1}>
+        <NewTeamButton onPress={() => {openNewTeam()}} underlayColor={'#ccae00'} activeOpacity={1}>
           
           <NewTeamText style={{fontFamily:"PokemonStyle"}}>New Team</NewTeamText>
           
         </NewTeamButton>
 
-        <MyTeamsButton onPress={() => {openMyTeams()}} underlayColor={'#fad602'} activeOpacity={1}>
+        <MyTeamsButton onPress={() => {openMyTeams()}} underlayColor={'#ccae00'} activeOpacity={1}>
 
           <MyTeamsText style={{fontFamily:"PokemonStyle"}}>My Teams</MyTeamsText>
 
