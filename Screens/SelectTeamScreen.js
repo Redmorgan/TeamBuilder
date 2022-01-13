@@ -343,53 +343,53 @@ const MainView = styled.View`
 
 const SelectTeamTabControls = styled.View`
 
-  width:100%
-  height:8%
-  background-color:#ed1e24
-  position:absolute
-  bottom:0
+  width:100%;
+  height:8%;
+  background-color:#ed1e24;
+  position:absolute;
+  bottom:0;
   border-top-width: 4px;
-  border-top-color: #000000
-  display:flex
-  flex-direction:row
+  border-top-color: #000000;
+  display:flex;
+  flex-direction:row;
 
 `
 
 const SelectTeamTabButton = styled.TouchableHighlight`
 
-  width:50%
-  height:100%
+  width:50%;
+  height:100%;
 
 `
 
 const ManageTeamTabButton = styled.TouchableHighlight`
 
-  width:50%
-  height:100%
+  width:50%;
+  height:100%;
 
 `
 
 const ButtonWrapper = styled.View`
 
-  height:100%
-  width:100%
-  display:flex
-  align-items:center
-  justify-content:center
+  height:100%;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
 `
 
 const TabIconImage = styled.Image`
 
-  width:32px
-  height:32px
+  width:32px;
+  height:32px;
 
 `
 
 const TabLabel = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:25px
+  font-family:PokemonStyle;
+  font-size:25px;
 
 `
 

@@ -147,33 +147,33 @@ const GameContainer = styled.ImageBackground`
   height:80%;
   display: flex;
   align-items: center;
-  margin-top:15%
+  margin-top:15%;
 
 `
 
 const GameScrollContainer = styled.View`
 
-  width:90%
-  height:90%
-  margin-top:15.2%
-  border-radius:10px
+  width:90%;
+  height:90%;
+  margin-top:15.2%;
+  border-radius:10px;
 
 `
 
 const GameScroll = styled.ScrollView`
 
-  width:100%
+  width:100%;
 
 `
 
 const ConfirmGameButton = styled.TouchableHighlight`
 
-  width:75%
-  height:10%
-  margin-top:12px
+  width:75%;
+  height:10%;
+  margin-top:12px;
   background-color:#c7e8f4;
-  border-radius:10px
-  border: 3px solid #a3cede
+  border-radius:10px;
+  border: 3px solid #a3cede;
   display: flex;
   align-items: center;
   justify-content:center;
@@ -182,7 +182,7 @@ const ConfirmGameButton = styled.TouchableHighlight`
 
 const ConfirmText = styled.Text`
 
-    font-size:45px
+  font-size:45px;
 
 `
 

@@ -115,51 +115,51 @@ const DeleteTeamContainer = styled.View`
 
 const DeleteTeamBody = styled.View`
 
-    width:80%
-    height:40%
-    background-color:#ffffff
-    border-radius:20px
-    border: 4px solid #000000
+    width:80%;
+    height:40%;
+    background-color:#ffffff;
+    border-radius:20px;
+    border: 4px solid #000000;
     align-items:center;
-    justify-content:center
+    justify-content:center;
 
 `
 
 const DeleteTeamHeader = styled.Text`
 
-    font-family:PokemonStyle
-    font-size:40px
-    margin-top:10px
-    text-align:center
+    font-family:PokemonStyle;
+    font-size:40px;
+    margin-top:10px;
+    text-align:center;
 
 `
 
 const ControlButtonsContainer = styled.View`
 
-    height:20%
-    width:80%
-    display:flex
-    flex-direction:row
-    margin-top:6%
-    justify-content:space-between
+    height:20%;
+    width:80%;
+    display:flex;
+    flex-direction:row;
+    margin-top:6%;
+    justify-content:space-between;
 
 `
 
 const ConfirmButton = styled.TouchableHighlight`
 
-    width:48%
-    height:100%
-    justify-content:center
-    align-items:center
+    width:48%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
 
 `
 
 const CancelButton = styled.TouchableHighlight`
 
-    width:48%
-    height:100%
-    justify-content:center
-    align-items:center
+    width:48%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
 
 `
 

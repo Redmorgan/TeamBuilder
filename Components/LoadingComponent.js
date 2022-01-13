@@ -28,18 +28,18 @@ const LoadingComponent = () => {
 
 const LoadingContainer = styled.View`
 
-    width:100%
-    display:flex
-    align-items:center
+    width:100%;
+    display:flex;
+    align-items:center;
 
 `
 
 const LoadingLabel = styled.Text`
 
-  width:100%
-  font-family:PokemonStyle
-  text-align:center
-  font-size:30px
+  width:100%;
+  font-family:PokemonStyle;
+  text-align:center;
+  font-size:30px;
 
 `
 

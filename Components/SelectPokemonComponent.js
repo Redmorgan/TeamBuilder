@@ -391,189 +391,190 @@ const SelectPokemonComponent = ({ name, types, spriteURL, encounterURL, game, ad
 const SelectPokemonContainer = styled.View`
 
   width: 95%;
-  margin-left:2.5%
-  margin-bottom:2%
+  margin-left:2.5%;
+  margin-bottom:2%;
 
 `;
 
 const SelectPokemonWrapper = styled.View`
 
-  width:100%
+  width:100%;
 
 `
 
 const SelectPokemonRowTouchable = styled.TouchableHighlight`
 
-  width: 100%
-  height: 80px
-  border: 3px solid #000000
-  border-top-left-radius:20px
-  border-bottom-left-radius:20px
-  border-top-right-radius:90px
-  border-bottom-right-radius:90px
+  width: 100%;
+  height: 80px;
+  border: 3px solid #000000;
+  border-top-left-radius:20px;
+  border-bottom-left-radius:20px;
+  border-top-right-radius:90px;
+  border-bottom-right-radius:90px;
 
 `
 
 const SelectPokemonRowWrapper = styled.View`
 
-  width:100%
-  height:100%
+  width:100%;
+  height:100%;
   display: flex;
   align-items: center;
-  flex-direction:row
+  flex-direction:row;
 
 `
 
 const PokemonTypesContainer = styled.View`
 
-  width:105px
-  height:50px
+  width:105px;
+  height:50px;
   display: flex;
-  flex-direction:row
-  margin-left:10px
+  flex-direction:row;
+  margin-left:10px;
 
 `
 
 const PokemonNameLabel = styled.Text`
 
-  font-size:45px
-  font-family:PokemonStyle
-  margin-left:10px
-  width:45%
+  font-size:45px;
+  font-family:PokemonStyle;
+  margin-left:10px;
+  width:45%;
 
 `
 
 const PokemonType = styled.Image`
 
-  height:50px
-  width:50px
-  border-radius:90px
+  height:50px;
+  width:50px;
+  border-radius:90px;
 
 `
 
 const AddPokemonTouchable = styled.TouchableHighlight`
 
-  width:50px
-  height:50px
-  border-radius:90px
-  position:absolute
-  right:15px
-
+  width:50px;
+  height:50px;
+  border-radius:90px;
+  position:absolute;
+  right:15px;
 `
 
 const AddPokemonIcon = styled.Image`
 
-  width:100%
-  height:100%
+  width:100%;
+  height:100%;
 
 `
 
 const SelectPokemonExpand = styled.View`
 
-  width:88.5%
-  height:160px
-  margin-left:2%
-  border-bottom-left-radius:20px
-  border-bottom-right-radius:20px
-  border-right-color:#000000
-  border-left-color:#000000
-  border-bottom-color:#000000
-  border-right-width:3px
-  border-left-width:3px
-  border-bottom-width:3px
+  width:88.5%;
+  height:160px;
+  margin-left:2%;
+  border-bottom-left-radius:20px;
+  border-bottom-right-radius:20px;
+  border-right-color:#000000;
+  border-left-color:#000000;
+  border-bottom-color:#000000;
+  border-right-width:3px;
+  border-left-width:3px;
+  border-bottom-width:3px;
   display: flex;
-  flex-direction:row
-  align-items:center
+  flex-direction:row;
+  align-items:center;
 
 `
 
 const PokemonSprite = styled.Image`
 
-  width:120px
-  height:120px
+  width:120px;
+  height:120px;
 
 `
 
 const PokemonDataContainer = styled.View`
 
-  width:64.6%
-  height:100%
+  width:64.6%;
+  height:100%;
 
 `
 
 const PokemonFlavourText = styled.Text`
-  width:100%
-  height:70%
-  font-family:PokemonStyle
-  font-size:19px
-  padding-top:10px
-  text-align:justify
-  padding-right:10px
-  line-height:18px
+
+  width:100%;
+  height:70%;
+  font-family:PokemonStyle;
+  font-size:19px;
+  padding-top:10px;
+  text-align:justify;
+  padding-right:10px;
+  line-height:18px;
 
 `
 
 const LocationFlatListContainer = styled.View`
-  height:70%
-  width:100%
-  display:flex
+
+  height:70%;
+  width:100%;
+  display:flex;
 
 `
 
 const LocationFlatList = styled.FlatList`
 
-  height:90%
-  padding-top:10px
+  height:90%;
+  padding-top:10px;
 
 `
 
 const PokemonDataTabs = styled.View`
 
-  width:100%
-  height:25%
-  display:flex
-  flex-direction:row
-  justify-content:space-around
+  width:100%;
+  height:25%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-around;
 
 `
 
 const PokemonDescriptionButton = styled.TouchableHighlight`
 
-  height:100%
-  width:40%
-  background-color:#ed1e24
-  display:flex
-  justify-content:center
-  align-items:center
-  border-radius:5px
-  border: 1px solid #000000
+  height:100%;
+  width:40%;
+  background-color:#ed1e24;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:5px;
+  border: 1px solid #000000;
 
 `
 
 const PokemonLocationButton = styled.TouchableHighlight`
 
-  height:100%
-  width:40%
-  background-color:#ed1e24
-  display:flex
-  justify-content:center
-  align-items:center
-  border-radius:5px
-  border: 1px solid #000000
+  height:100%;
+  width:40%;
+  background-color:#ed1e24;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:5px;
+  border: 1px solid #000000;
 
 `
 
 const ButtonLabel = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:20px
+  font-family:PokemonStyle;
+  font-size:20px;
 
 `
 
 const LocationLabel = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:20px
+  font-family:PokemonStyle;
+  font-size:20px;
 
 `
 

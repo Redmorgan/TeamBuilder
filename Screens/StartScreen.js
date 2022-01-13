@@ -104,8 +104,8 @@ const MainView = styled.View`
 
 const PokedexBackground = styled.ImageBackground`
 
-  width:100%
-  height:100%
+  width:100%;
+  height:100%;
   display: flex;
   align-items: center;
 
@@ -113,19 +113,19 @@ const PokedexBackground = styled.ImageBackground`
 
 const TeamBuilderLogo = styled.Image`
 
-  width:80%
-  margin-top:35%
+  width:80%;
+  margin-top:35%;
 
 `
 
 const NewTeamButton = styled.TouchableHighlight`
 
-  width:230px
-  height:60px
-  background-color:#fad602
-  border-radius:25px
-  border: 2px solid #000000
-  margin-top:10%
+  width:230px;
+  height:60px;
+  background-color:#fad602;
+  border-radius:25px;
+  border: 2px solid #000000;
+  margin-top:10%;
   display: flex;
   align-items: center;
   justify-content:center;
@@ -134,18 +134,18 @@ const NewTeamButton = styled.TouchableHighlight`
 
 const NewTeamText = styled.Text`
 
-  font-size:60px
+  font-size:60px;
 
 `
 
 const MyTeamsButton = styled.TouchableHighlight`
 
-  width:230px
-  height:60px
-  background-color:#fad602
-  border-radius:25px
-  border: 2px solid #000000
-  margin-top:20px
+  width:230px;
+  height:60px;
+  background-color:#fad602;
+  border-radius:25px;
+  border: 2px solid #000000;
+  margin-top:20px;
   display: flex;
   align-items: center;
   justify-content:center;
@@ -154,7 +154,7 @@ const MyTeamsButton = styled.TouchableHighlight`
 
 const MyTeamsText = styled.Text`
 
-  font-size:60px
+  font-size:60px;
 
 `
 

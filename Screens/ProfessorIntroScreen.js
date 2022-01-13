@@ -138,31 +138,39 @@ const ProfessorIntroScreen = ( { navigation }) => {
 }
 
 const MainView = styled.View`
+
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
+
 `;
 
 const Background = styled.ImageBackground`
+
   width:100%;
   height:100%;
   display: flex;
   align-items: center;
+
 `
 
 const BackArrowButton = styled.TouchableHighlight`
-  width:50px
-  height:50px
-  position:absolute
-  z-index:4
-  top:4%
-  left:10px
+
+  width:50px;
+  height:50px;
+  position:absolute;
+  z-index:4;
+  top:4%;
+  left:10px;
+
 `
 
 const BackArrowImage = styled.Image`
+
   width:100%;
   height:100%;
+
 `
 
 const OakImage = styled.Image`
@@ -174,12 +182,15 @@ const OakImage = styled.Image`
 `
 
 const TextBoxTouchable = styled.TouchableHighlight`
+
   width:90%;
   height:20%;
   margin-top: 10px;
+
 `
 
 const TextBoxWrapper = styled.View`
+
   width:100%;
   height:100%;
   display: flex;
@@ -189,12 +200,14 @@ const TextBoxWrapper = styled.View`
 `
 
 const TextBoxBackground = styled.Image`
+
   width:100%;
   height:100%;
 
 `
 
 const TextBoxText = styled.Text`
+
   width:90%;
   height:80%;
   position:absolute;
@@ -205,12 +218,12 @@ const TextBoxText = styled.Text`
 
 const Bobber = styled.Image`
 
-  width:20px
-  height:20px
-  z-index:3
-  position:absolute
-  bottom:10px
-  right:15px
+  width:20px;
+  height:20px;
+  z-index:3;
+  position:absolute;
+  bottom:10px;
+  right:15px;
 
 `
 

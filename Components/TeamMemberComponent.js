@@ -86,49 +86,49 @@ const TeamMemberComponent = ({ removeFromTeam, pokemon, readOnly, index }) => {
 
 const TeamMemberContainer = styled.View`
 
-  height:50%
-  width:33.33%
-  align-items:center
-  margin-bottom:5px
+  height:50%;
+  width:33.33%;
+  align-items:center;
+  margin-bottom:5px;
 
 `
 
 const TouchablePokemonSprite = styled.TouchableHighlight`
 
-  width:90%
-  height:90%
+  width:90%;
+  height:90%;
 
 `
 
 const PokemonSprite = styled.Image`
 
-  height:100%
-  width:100%
+  height:100%;
+  width:100%;
 
 `
 
 const PokemonName = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:25px
+  font-family:PokemonStyle;
+  font-size:25px;
 
 `
 
 const RemovePokemonTouchable = styled.TouchableHighlight`
 
-  width:20px
-  height:20px
-  position:absolute
-  right:0
-  z-index:10
-  top:10%
+  width:20px;
+  height:20px;
+  position:absolute;
+  right:0;
+  z-index:10;
+  top:10%;
 
 `
 
 const RemovePokemonImage = styled.Image`
 
-  width:100%
-  height:100%
+  width:100%;
+  height:100%;
 
 `
 

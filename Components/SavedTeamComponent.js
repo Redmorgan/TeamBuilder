@@ -252,92 +252,92 @@ const SavedTeamComponent = ({ teamData, deleteTeam, editTeamData }) => {
 const SavedTeamContainer = styled.View`
 
   width: 100%;
-  height: 325px
+  height: 325px;
   display: flex;
   align-items: center;
-  background-color:transparent
+  background-color:transparent;
 
 `
 
 const SavedTeamCard = styled.View`
 
-    width:90%
-    height:265px
-    border-top-left-radius:20px
-    border-top-right-radius:20px
-    border-bottom-left-radius:20px
-    border-bottom-right-radius:20px
-    align-items:center
-    border: 2px solid #000000
-    background-color:#ffffff
+    width:90%;
+    height:265px;
+    border-top-left-radius:20px;
+    border-top-right-radius:20px;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px;
+    align-items:center;
+    border: 2px solid #000000;
+    background-color:#ffffff;
 
 `
 
 const TeamRegionLabel = styled.Text`
 
-    font-family:PokemonStyle
-    font-size:40px
-    height:40px
-    border-bottom-width:2px
-    border-bottom-color:#000000
-    width:100%
-    text-align:center
-    background-color:#ed1e24
-    border-top-left-radius:18px
-    border-top-right-radius:18px
+    font-family:PokemonStyle;
+    font-size:40px;
+    height:40px;
+    border-bottom-width:2px;
+    border-bottom-color:#000000;
+    width:100%;
+    text-align:center;
+    background-color:#ed1e24;
+    border-top-left-radius:18px;
+    border-top-right-radius:18px;
 
 `
 
 const TeamPokemonContainer = styled.View`
 
-    width:100%
-    height:185px
-    display:flex
-    flex-wrap:wrap
-    flex-direction:row
+    width:100%;
+    height:185px;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
 
 `
 
 const BackgroundLogoImage = styled.Image`
 
-    width:80%
-    z-index:-1
-    position:absolute
-    top:40px
-    opacity:0.2
+    width:80%;
+    z-index:-1;
+    position:absolute;
+    top:40px;
+    opacity:0.2;
 
 ` 
 
 const TeamControls = styled.View`
 
-    width:90%
-    height:45px
-    margin-top:5px
-    display:flex
-    flex-direction:row
-    justify-content:space-around
+    width:90%;
+    height:45px;
+    margin-top:5px;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
 
 `
 
 const TeamControlButton = styled.TouchableHighlight`
 
-    height:100%
-    width:30%
-    background-color:#ed1e24
-    justify-content:center
-    align-items:center
-    border: 2px solid #000000
-    border-top-left-radius:10px
-    border-top-right-radius:10px
-    border-bottom-left-radius:10px
-    border-bottom-right-radius:10px
+    height:100%;
+    width:30%;
+    background-color:#ed1e24;
+    justify-content:center;
+    align-items:center;
+    border: 2px solid #000000;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
 
 `
 
 const ButtonLabel = styled.Text`
 
-    font-family:PokemonStyle
-    font-size:30px
+    font-family:PokemonStyle;
+    font-size:30px;
 
 `
 

@@ -163,32 +163,32 @@ const MainView = styled.View`
 
 const ViewTeamsHeader = styled.View`
 
-  width:100%
-  height:100px
-  background-color:#ed1e24
+  width:100%;
+  height:100px;
+  background-color:#ed1e24;
   border-bottom-width: 4px;
-  border-bottom-color: #000000
-  display:flex
-  justify-content:center
-  align-items:center
+  border-bottom-color: #000000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
 `
 
 const HeaderLabel = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:60px
+  font-family:PokemonStyle;
+  font-size:60px;
 
 `
 
 const BackArrowButton = styled.TouchableHighlight`
 
-    width:50px
-    height:50px
-    position:absolute
-    z-index:4
-    top:25px
-    left:10px
+    width:50px;
+    height:50px;
+    position:absolute;
+    z-index:4;
+    top:25px;
+    left:10px;
 
 `
 
@@ -201,25 +201,25 @@ const BackArrowImage = styled.Image`
 
 const TeamsFlatlist = styled.FlatList`
 
-    width:100%
-    background-color:#F5F5F5
-    padding-top:10px
+    width:100%;
+    background-color:#F5F5F5;
+    padding-top:10px;
 
 `
 
 const NoTeamContainer = styled.View`
 
-    margin-top:20px
-    width:95%
-    align-items:center
+    margin-top:20px;
+    width:95%;
+    align-items:center;
 
 `
 
 const NoTeamText = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:45px
-  text-align:center
+  font-family:PokemonStyle;
+  font-size:45px;
+  text-align:center;
 
 `
 

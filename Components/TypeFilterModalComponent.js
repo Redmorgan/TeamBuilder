@@ -265,87 +265,87 @@ const TypeFilterContainer = styled.View`
 
 const TypeFilterBody = styled.View`
 
-    width:80%
-    height:90%
-    background-color:#ffffff
-    border-radius:20px
-    border: 4px solid #000000
+    width:80%;
+    height:90%;
+    background-color:#ffffff;
+    border-radius:20px;
+    border: 4px solid #000000;
     align-items:center;
 
 `
 
 const TypeFilterHeader = styled.Text`
 
-    font-family:PokemonStyle
-    font-size:55px
-    margin-top:10px
+    font-family:PokemonStyle;
+    font-size:55px;
+    margin-top:10px;
 
 `
 
 const TypeContainer = styled.View`
 
-    width:90%
-    margin-top:20px
-    display:flex
-    flex-wrap:wrap
-    flex-direction:row
-    justify-content:space-around
+    width:90%;
+    margin-top:20px;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+    justify-content:space-around;
 
 `
 
 const TypeButton = styled.TouchableHighlight`
 
-    width:80px
-    height:80px
-    margin-bottom:15px
+    width:80px;
+    height:80px;
+    margin-bottom:15px;
 
 `
 
 const TypeImage = styled.Image`
 
-    width:100%
-    height:100%
+    width:100%;
+    height:100%;
 
 `
 
 const FilterControls = styled.View`
 
-    width:96%
-    height:8.7%
-    display:flex
-    flex-direction:row
-    justify-content:space-between
+    width:96%;
+    height:8.7%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
 
 `
 
 const ClearFilterButton = styled.TouchableHighlight`
 
-    width:49%
-    height:100%
-    background-color:#ed1e24
-    border-bottom-left-radius:10px
-    display:flex
-    justify-content:center
-    align-items:center
+    width:49%;
+    height:100%;
+    background-color:#ed1e24;
+    border-bottom-left-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
 `
 
 const ConfirmFilterButton = styled.TouchableHighlight`
 
-    width:49%
-    height:100%
-    background-color:green
-    border-bottom-right-radius:10px
-    display:flex
-    justify-content:center
-    align-items:center
+    width:49%;
+    height:100%;
+    background-color:green;
+    border-bottom-right-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
 `
 
 const ButtonLabel = styled.Text`
 
-    font-family:PokemonStyle
-    font-size:40px
+    font-family:PokemonStyle;
+    font-size:40px;
 
 `
 

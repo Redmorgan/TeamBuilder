@@ -46,20 +46,20 @@ const SelectGameComponent = ({ logoImg, onPress, game, selectedGame }) => {
 const SelectGameTouchable = styled.TouchableHighlight`
 
   width: 90%;
-  height:145px
+  height:145px;
   display: flex;
   align-items: center;
   justify-content:center;
-  margin-left:5%
-  margin-bottom:5px
+  margin-left:5%;
+  margin-bottom:5px;
 
 `;
 
 const SelectGameLogo = styled.Image`
 
-  width:100%
-  height:100%
-  border-radius:10px
+  width:100%;
+  height:100%;
+  border-radius:10px;
 
 `
 

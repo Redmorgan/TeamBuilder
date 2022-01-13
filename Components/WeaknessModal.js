@@ -234,64 +234,64 @@ const WeaknessModal = styled.Modal`
  
 const WeaknessContainer = styled.View`
 
-    flex:1;
-    justify-content:center;
-    align-items:center;
-    background-color: rgba(181,181,181,0.5);
+  flex:1;
+  justify-content:center;
+  align-items:center;
+  background-color: rgba(181,181,181,0.5);
 
 `
  
 const WeaknessBody = styled.View`
  
-    width:80%
-    height:35%
-    background-color:#ffffff
-    border-radius:20px
-    border: 4px solid #000000
-    align-items:center;
+  width:80%;
+  height:35%;
+  background-color:#ffffff;
+  border-radius:20px;
+  border: 4px solid #000000;
+  align-items:center;
  
 `
  
 const WeaknessHeader = styled.Text`
  
-    font-family:PokemonStyle
-    font-size:40px
-    text-align:center
+  font-family:PokemonStyle;
+  font-size:40px;
+  text-align:center;
  
 `
 
 const WeaknessListWrapper = styled.View`
  
-    width:91%
-    height:64%
-    margin-top:5%
+  width:91%;
+  height:64%;
+  margin-top:5%;
  
 `
 
 const WeaknessFlatList = styled.FlatList`
  
-    width:100%
+  width:100%;
  
 `
 
 const TypeImage = styled.Image`
 
-    width:65px
-    height:65px
-    margin-right:10px
-    margin-bottom:10px
+  width:65px;
+  height:65px;
+  margin-right:10px;
+  margin-bottom:10px;
 
 `
 
 const CloseModalButton = styled.TouchableHighlight`
 
-    width:40px
-    height:40px
-    position:absolute
-    top:5px
-    right:10px
-    justify-content:center
-    align-items:center
+  width:40px;
+  height:40px;
+  position:absolute;
+  top:5px;
+  right:10px;
+  justify-content:center;
+  align-items:center;
 
 `
 

@@ -114,8 +114,6 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
 
               }
 
-              //console.log(TypeEffects[k].strengths[l])
-
               if(duplicate == false){
 
                 Strengths.push(TypeEffects[k].strengths[l])
@@ -153,9 +151,6 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
       }
 
     }
-
-    console.log(Strengths)
-    console.log(Weaknesses)
 
     for(var i = 0; i <= Weaknesses.length-1; i++){
 
@@ -347,7 +342,6 @@ const NewTeamManagerComponent = ({ selectedTeam, setTeam, navigation, game, regi
 
       const teamData = {game:game, region:region, team:selectedTeam}
 
-
       if(teamID != null){
 
         await AsyncStorage.setItem(teamID, JSON.stringify(teamData))
@@ -444,109 +438,108 @@ const MainView = styled.View`
 
 const SelectTeamHeader = styled.View`
 
-  width:100%
-  height:100px
-  background-color:#ed1e24
+  width:100%;
+  height:100px;
+  background-color:#ed1e24;
   border-bottom-width: 4px;
-  border-bottom-color: #000000
-  display:flex
-  justify-content:center
-  align-items:center
+  border-bottom-color: #000000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
 `
 
 const TeamHeaderLabel = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:60px
+  font-family:PokemonStyle;
+  font-size:60px;
 
 `
 
 const NoTeamContainer = styled.View`
 
-  width:100%
-  align-items:center
+  width:100%;
+  align-items:center;
 
 `
 
 const NoTeamText = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:50px
-  text-align:center
+  font-family:PokemonStyle;
+  font-size:50px;
+  text-align:center;
 
 `
 
 const PokemonTeamContainer = styled.View`
 
-  width:90%
-  height:30%
-  margin-top:5%
-  display:flex
-  flex-direction:row
-  flex-wrap:wrap
+  width:90%;
+  height:30%;
+  margin-top:5%;
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
 
 `
 
 const TypeEffectivenessContainer = styled.View`
 
-  width:90%
-  height:30%
-  margin-top:10%
+  width:90%;
+  height:30%;
+  margin-top:10%;
 
 `
 
 const TypeEffectiveTitle = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:35px
+  font-family:PokemonStyle;
+  font-size:35px;
 
 `
 
 const TypeEffectivenessList = styled.View`
 
-  width:100%
-  height:65%
-  margin-top:10px
+  width:100%;
+  height:65%;
+  margin-top:10px;
 
 `
 
 const WeaknessFlatList = styled.FlatList`
 
-  width:100%
-  flex-direction:row
-  flex-wrap:wrap
-
+  width:100%;
+  flex-direction:row;
+  flex-wrap:wrap;
 
 `
 
 const TypeImage = styled.Image`
 
-  width:65px
-  height:65px
-  margin-right:10px
-  margin-bottom:10px
+  width:65px;
+  height:65px;
+  margin-right:10px;
+  margin-bottom:10px;
 
 `
 
 const SaveTeamButton = styled.TouchableHighlight`
 
-  width:65%
-  height:10%
-  margin-top:2.7%
-  background-color:#ed1e24
-  border-radius:25px
-  border:3px solid #000000
-  display:flex
-  align-items:center
-  justify-content:center
+  width:65%;
+  height:10%;
+  margin-top:2.7%;
+  background-color:#ed1e24;
+  border-radius:25px;
+  border:3px solid #000000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
 `
 
 const ButtonLabel = styled.Text`
 
-  font-family:PokemonStyle
-  font-size:50px
+  font-family:PokemonStyle;
+  font-size:50px;
 
 `
 
